@@ -1,14 +1,5 @@
 <template>
-  <section class="relative min-h-screen flex items-center justify-center bg-mint-green/95 dark:bg-rich-black/95 overflow-hidden">
-    <!-- Subtle animated background elements -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute -inset-[10px] opacity-20">
-        <div class="absolute top-0 -left-4 w-72 h-72 bg-[var(--color-wine)] rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-        <div class="absolute top-0 -right-4 w-72 h-72 bg-[var(--color-viridian)] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-[var(--color-mint-green)] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
-      </div>
-    </div>
-
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Main content -->
     <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center">
@@ -82,7 +73,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-const subtitleText = "Undergrad | Aspiring Full Stack Developer | Seeking Internship";
+const subtitleText = "CS Student | Full Stack Developer | Seeking Internship";
 let currentText = '';
 let currentIndex = 0;
 let isDeleting = false;
@@ -128,13 +119,6 @@ onMounted(() => {
 </script>
 
 <style>
-@keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
-}
-
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -151,10 +135,6 @@ onMounted(() => {
   }
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
 .animate-fade-in {
   animation: fade-in 0.8s ease-out forwards;
 }
@@ -163,16 +143,8 @@ onMounted(() => {
   animation: slide-up 0.8s ease-out forwards;
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
 .animation-delay-300 {
   animation-delay: 0.3s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
 }
 
 .animation-delay-500 {

@@ -2,7 +2,7 @@
   <div class="relative inline-block theme-toggle">
     <button
       @click="toggleDropdown"
-      class="p-2 rounded-lg bg-mint-green dark:bg-rich-black hover:bg-mint-green-300 dark:hover:bg-rich-black-300 transition-colors"
+      class="p-2 rounded-lg hover:bg-mint-green-300 dark:hover:bg-rich-black-300 transition-colors"
       :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
     >
       <!-- Sun icon -->
@@ -74,7 +74,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useDarkMode } from '../composables/useDarkMode'
+import { useDarkMode } from '../../composables/useDarkMode'
 
 const { theme, isDark, updateTheme } = useDarkMode()
 const showDropdown = ref(false)

@@ -1,25 +1,24 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import ThemeToggle from '../ThemeToggle.vue'
+import ThemeToggle from '../common/ThemeToggle.vue'
 
 const route = useRoute()
 const isMobileMenuOpen = ref(false)
-const scrollProgress = ref(0)
+const isScrolled = ref(false)
 
 // Computed property for active link classes
 const getActiveClasses = (path: string) => computed(() => {
   return {
-    'font-mono font-font-semibold text-wine dark:text-mint-green font-medium ring-2 ring-[var(--color-wine)] dark:ring-[var(--color-mint-green)]': route.path === path,
-    'font-mono text-gray-700 dark:text-mint-green hover:ring-2 hover:ring-[var(--color-wine)]/50 dark:hover:ring-[var(--color-mint-green)]/50': route.path !== path
+    'font-mono font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]': route.path === path,
+    'font-mono text-gray-700 dark:text-mint-green hover:text-wine dark:hover:text-mint-green hover:border-b-2 hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]': route.path !== path
   }
 })
 
-// Handle scroll progress
+// Handle navbar background
 const handleScroll = () => {
   const winScroll = document.documentElement.scrollTop
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-  scrollProgress.value = (winScroll / height) * 100
+  isScrolled.value = winScroll > 20 // Show background after 20px scroll
 }
 
 // Handle scroll lock when mobile menu is open
@@ -65,17 +64,17 @@ const navItems = [
     </svg>`
   },
   {
-    name: 'Projects',
-    path: '/projects',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-      <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
-    </svg>`
-  },
-  {
     name: 'About',
     path: '/about',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
       <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+    </svg>`
+  },
+  {
+    name: 'Projects',
+    path: '/projects',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
     </svg>`
   },
   {
@@ -90,38 +89,27 @@ const navItems = [
 </script>
 
 <style scoped>
-/* Remove the old router-link-active styles since we're handling it with dynamic classes */
-:focus-visible {
-  outline: none;
+/* Only keeping necessary custom CSS that can't be achieved with Tailwind */
+.nav-background {
+  @apply transition-all duration-300;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-/* Remove all router-link-active styles */
-.router-link-active,
-.router-link-exact-active {
-  @apply ring-0;
-}
-
-/* Ensure active state remains visible for non-home links */
-.router-link-active:not([href="/"]):not(:focus-visible),
-.router-link-exact-active:not([href="/"]):not(:focus-visible) {
-  @apply ring-2;
-  ring-color: var(--color-wine);
-}
-
-:root.dark .router-link-active:not([href="/"]):not(:focus-visible),
-:root.dark .router-link-exact-active:not([href="/"]):not(:focus-visible) {
-  ring-color: var(--color-mint-green);
+:global(.dark) .nav-background {
+  background: rgba(0, 0, 0, 0.05);
 }
 </style>
 
 <template>
   <nav
-    class="w-full fixed top-2 z-50 transition-all duration-300"
-    :class="{'bg-white/10 dark:bg-rich-black/10': scrollProgress > 0}"
+    class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto fixed left-1/2 -translate-x-1/2 top-2 z-40 transition-all duration-300 rounded-lg focus-visible:outline-none"
+    :class="{ 'nav-background shadow-lg': isScrolled }"
     role="navigation"
     aria-label="Main navigation"
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Navigation Links -->
         <div class="hidden md:flex items-center space-x-8">
@@ -129,21 +117,18 @@ const navItems = [
             v-for="item in navItems"
             :key="item.path"
             :to="item.path"
-            class="group relative px-3 py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-wine dark:focus:ring-mint-green rounded-md"
-            :class="getActiveClasses(item.path).value"
+            class="group relative px-3 py-2 transition-all duration-200 focus:outline-none"
+            :class="[
+              route.path === item.path
+                ? 'font-mono font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]'
+                : 'font-mono text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'
+            ]"
             :aria-current="route.path === item.path ? 'page' : undefined"
           >
             <div class="flex items-center space-x-2">
               <span v-html="item.icon" class="transition-transform group-hover:scale-110" aria-hidden="true"></span>
               <span>{{ item.name }}</span>
             </div>
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300"
-              :class="[
-                route.path === item.path ? 'w-full' : 'group-hover:w-full',
-                'bg-wine dark:bg-mint-green'
-              ]"
-            ></span>
           </router-link>
         </div>
 
@@ -207,8 +192,12 @@ const navItems = [
             v-for="item in navItems"
             :key="item.path"
             :to="item.path"
-            class="group flex items-center space-x-2 px-4 py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-wine dark:focus:ring-mint-green rounded-md"
-            :class="getActiveClasses(item.path).value"
+            class="group flex items-center space-x-2 px-4 py-2 transition-all duration-200 focus:outline-none"
+            :class="[
+              route.path === item.path
+                ? 'font-mono font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]'
+                : 'font-mono text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'
+            ]"
             @click="closeMobileMenu"
             role="menuitem"
             :aria-current="route.path === item.path ? 'page' : undefined"
@@ -219,12 +208,5 @@ const navItems = [
         </div>
       </Transition>
     </div>
-
-    <!-- Scroll Progress Indicator -->
-    <div
-      class="h-0.5 bg-wine/20 dark:bg-mint-green/20"
-      :style="{ width: `${scrollProgress}%` }"
-      aria-hidden="true"
-    ></div>
   </nav>
 </template>

@@ -1,0 +1,4 @@
+# This file ensures the about directory is tracked by git
+# Place your about section images in this directory
+# Recommended image formats: .jpg, .png, .webp
+# Recommended image size: 400x400px or larger (will be displayed at max-w-[400px])
