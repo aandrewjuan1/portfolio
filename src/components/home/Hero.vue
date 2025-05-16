@@ -36,17 +36,18 @@
           <a href="#projects"
              class="px-8 py-3 rounded-lg font-mono text-base font-medium transition-all duration-300
                     bg-[var(--color-wine)] text-white dark:bg-[var(--color-mint-green)] dark:text-[var(--color-rich-black)]
-                    hover:bg-[var(--color-wine-600)] dark:hover:bg-[var(--color-mint-green-400)]
-                    transform hover:scale-105 hover:shadow-lg
-                    border-2 border-transparent hover:border-[var(--color-wine-300)] dark:hover:border-[var(--color-mint-green-200)]">
+                    hover:bg-[var(--color-wine-700)] dark:hover:bg-[var(--color-mint-green-300)]
+                    transform hover:scale-[1.02] hover:shadow-md
+                    border-2 border-transparent hover:border-[var(--color-wine-400)] dark:hover:border-[var(--color-mint-green-300)]">
             View Projects
           </a>
           <a href="#contact"
              class="px-8 py-3 rounded-lg font-mono text-base font-medium transition-all duration-300
                     bg-transparent text-[var(--color-wine)] dark:text-[var(--color-mint-green)]
                     border-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]
-                    hover:bg-[var(--color-wine)] hover:text-white dark:hover:bg-[var(--color-mint-green)] dark:hover:text-[var(--color-rich-black)]
-                    transform hover:scale-105 hover:shadow-lg">
+                    hover:bg-[var(--color-wine-50)] dark:hover:bg-[var(--color-mint-green-50)]
+                    hover:text-[var(--color-wine-700)] dark:hover:text-[var(--color-mint-green-700)]
+                    transform hover:scale-[1.02] hover:shadow-md">
             Contact Me
           </a>
         </div>
