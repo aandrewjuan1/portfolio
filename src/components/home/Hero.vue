@@ -58,17 +58,17 @@
 
         <!-- Social Links with fade-in animation -->
         <div class="font-mono flex justify-center gap-8 animate-fade-in animation-delay-700">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer"
+          <a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer"
              class="group flex flex-col items-center text-[var(--color-rich-black)] dark:text-[var(--color-viridian-300)] hover:text-[var(--color-wine)] dark:hover:text-[var(--color-mint-green)] transition-all duration-300">
             <i class="fab fa-github text-3xl mb-2"></i>
             <span class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">GitHub</span>
           </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer"
              class="group flex flex-col items-center text-[var(--color-rich-black)] dark:text-[var(--color-viridian-300)] hover:text-[var(--color-wine)] dark:hover:text-[var(--color-mint-green)] transition-all duration-300">
             <i class="fab fa-linkedin text-3xl mb-2"></i>
             <span class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">LinkedIn</span>
           </a>
-          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer"
+          <a href="https://twitter.com/twitter" target="_blank" rel="noopener noreferrer"
              class="group flex flex-col items-center text-[var(--color-rich-black)] dark:text-[var(--color-viridian-300)] hover:text-[var(--color-wine)] dark:hover:text-[var(--color-mint-green)] transition-all duration-300">
             <i class="fab fa-twitter text-3xl mb-2"></i>
             <span class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Twitter</span>
@@ -82,7 +82,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-const subtitleText = "Full Stack Developer";
+const subtitleText = "Undergrad | Aspiring Full Stack Developer | Seeking Internship";
 let currentText = '';
 let currentIndex = 0;
 let isDeleting = false;
