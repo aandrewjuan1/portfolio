@@ -21,13 +21,6 @@
     --color-mint-green-700: #a5b8b3;
     --color-mint-green-900: #7f918d;
 
-    /* Dim Gray */
-    --color-dim-gray-100: #c7cac1;
-    --color-dim-gray-300: #a1a597;
-    --color-dim-gray:     #717568;
-    --color-dim-gray-700: #55584d;
-    --color-dim-gray-900: #3c3f36;
-
     /* Rich Black */
     --color-rich-black-100: #3e4a51;
     --color-rich-black-300: #233239;
@@ -41,13 +34,6 @@
     --color-viridian:     #4C8577;
     --color-viridian-700: #326157;
     --color-viridian-900: #1d3e37;
-
-    /* Hooker's Green */
-    --color-hookers-green-100: #a2b3a7;
-    --color-hookers-green-300: #728d78;
-    --color-hookers-green:     #4E6E58;
-    --color-hookers-green-700: #35503e;
-    --color-hookers-green-900: #1f3226;
 }
 
 /* Add smooth transitions for theme changes */
