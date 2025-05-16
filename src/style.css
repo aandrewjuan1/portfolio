@@ -5,14 +5,49 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-family-primary: 'Poppins', sans-serif;
+    --font-family-primary: 'Poppins', sans-serif;
 
-  --color-wine: #6D2E46;
-  --color-mint-green: #D1E3DD;
-  --color-dim-gray: #717568;
-  --color-rich-black: #011C27;
-  --color-viridian: #4C8577;
-  --color-hookers-green: #4E6E58;
+    /* Wine */
+    --color-wine-100: #b98291;
+    --color-wine-300: #995266;
+    --color-wine:     #6D2E46;
+    --color-wine-700: #541d33;
+    --color-wine-900: #3b1323;
+
+    /* Mint Green */
+    --color-mint-green-100: #f0f7f5;
+    --color-mint-green-300: #dcebe6;
+    --color-mint-green:     #D1E3DD;
+    --color-mint-green-700: #a5b8b3;
+    --color-mint-green-900: #7f918d;
+
+    /* Dim Gray */
+    --color-dim-gray-100: #c7cac1;
+    --color-dim-gray-300: #a1a597;
+    --color-dim-gray:     #717568;
+    --color-dim-gray-700: #55584d;
+    --color-dim-gray-900: #3c3f36;
+
+    /* Rich Black */
+    --color-rich-black-100: #3e4a51;
+    --color-rich-black-300: #233239;
+    --color-rich-black:     #011C27;
+    --color-rich-black-700: #000d12;
+    --color-rich-black-900: #000406;
+
+    /* Viridian */
+    --color-viridian-100: #b3ccc5;
+    --color-viridian-300: #7ca89c;
+    --color-viridian:     #4C8577;
+    --color-viridian-700: #326157;
+    --color-viridian-900: #1d3e37;
+
+    /* Hooker's Green */
+    --color-hookers-green-100: #a2b3a7;
+    --color-hookers-green-300: #728d78;
+    --color-hookers-green:     #4E6E58;
+    --color-hookers-green-700: #35503e;
+    --color-hookers-green-900: #1f3226;
 }
 
 /* Add smooth transitions for theme changes */

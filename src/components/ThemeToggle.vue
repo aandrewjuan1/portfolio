@@ -2,7 +2,7 @@
   <div class="relative inline-block theme-toggle">
     <button
       @click="toggleDropdown"
-      class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+      class="p-2 rounded-lg bg-mint-green dark:bg-rich-black hover:bg-mint-green-300 dark:hover:bg-rich-black-300 transition-colors"
       :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
     >
       <!-- Sun icon -->
@@ -40,29 +40,29 @@
     <!-- Theme dropdown -->
     <div
       v-if="showDropdown"
-      class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50"
+      class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-mint-green dark:bg-rich-black z-50"
     >
       <div class="py-1" role="menu">
         <button
           @click="() => { updateTheme('light'); showDropdown = false; }"
-          class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-          :class="{ 'bg-gray-100 dark:bg-gray-700': theme === 'light' }"
+          class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300"
+          :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'light' }"
           role="menuitem"
         >
           Light
         </button>
         <button
           @click="() => { updateTheme('dark'); showDropdown = false; }"
-          class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-          :class="{ 'bg-gray-100 dark:bg-gray-700': theme === 'dark' }"
+          class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300"
+          :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'dark' }"
           role="menuitem"
         >
           Dark
         </button>
         <button
           @click="() => { updateTheme('system'); showDropdown = false; }"
-          class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-          :class="{ 'bg-gray-100 dark:bg-gray-700': theme === 'system' }"
+          class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300"
+          :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'system' }"
           role="menuitem"
         >
           System
