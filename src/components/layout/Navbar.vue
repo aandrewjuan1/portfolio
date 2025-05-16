@@ -10,8 +10,8 @@ const scrollProgress = ref(0)
 // Computed property for active link classes
 const getActiveClasses = (path: string) => computed(() => {
   return {
-    'text-wine dark:text-mint-green font-medium ring-2 ring-[var(--color-wine)] dark:ring-[var(--color-mint-green)]': route.path === path,
-    'text-gray-700 dark:text-mint-green hover:ring-2 hover:ring-[var(--color-wine)]/50 dark:hover:ring-[var(--color-mint-green)]/50': route.path !== path
+    'font-mono font-font-semibold text-wine dark:text-mint-green font-medium ring-2 ring-[var(--color-wine)] dark:ring-[var(--color-mint-green)]': route.path === path,
+    'font-mono text-gray-700 dark:text-mint-green hover:ring-2 hover:ring-[var(--color-wine)]/50 dark:hover:ring-[var(--color-mint-green)]/50': route.path !== path
   }
 })
 
@@ -116,11 +116,12 @@ const navItems = [
 
 <template>
   <nav
-    class="w-[80%] mx-auto bg-mint-green/95 dark:bg-rich-black/95 py-4 sticky top-0 z-50"
+    class="w-full fixed top-2 z-50 transition-all duration-300"
+    :class="{'bg-white/10 dark:bg-rich-black/10': scrollProgress > 0}"
     role="navigation"
     aria-label="Main navigation"
   >
-    <div class="container mx-auto px-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Navigation Links -->
         <div class="hidden md:flex items-center space-x-8">
