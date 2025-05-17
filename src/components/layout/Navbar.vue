@@ -1,19 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import ThemeToggle from '../common/ThemeToggle.vue'
 
 const route = useRoute()
 const isMobileMenuOpen = ref(false)
 const isScrolled = ref(false)
-
-// Computed property for active link classes
-const getActiveClasses = (path: string) => computed(() => {
-  return {
-    'font-mono font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]': route.path === path,
-    'font-mono text-gray-700 dark:text-mint-green hover:text-wine dark:hover:text-mint-green hover:border-b-2 hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]': route.path !== path
-  }
-})
 
 // Handle navbar background
 const handleScroll = () => {
@@ -121,7 +113,7 @@ const navItems = [
             :class="[
               route.path === item.path
                 ? 'font-mono font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]'
-                : 'font-mono text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'
+                : 'font-mono text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-b-2 hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'
             ]"
             :aria-current="route.path === item.path ? 'page' : undefined"
           >
