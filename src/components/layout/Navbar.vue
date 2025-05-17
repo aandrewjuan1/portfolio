@@ -84,13 +84,35 @@ const navItems = [
 /* Only keeping necessary custom CSS that can't be achieved with Tailwind */
 .nav-background {
   @apply transition-all duration-300;
+  /* Fallback background for browsers that don't support backdrop-filter */
+  background: rgba(255, 255, 255, 0.8);
+  /* Modern browsers */
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(16px);
+  /* Add all vendor prefixes for backdrop-filter */
   -webkit-backdrop-filter: blur(16px);
+  -moz-backdrop-filter: blur(16px);
+  -ms-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  /* Ensure the blur works in Firefox */
+  @supports (-moz-appearance:none) {
+    background: rgba(255, 255, 255, 0.8);
+  }
 }
 
 :global(.dark) .nav-background {
+  /* Fallback background for browsers that don't support backdrop-filter */
+  background: rgba(0, 0, 0, 0.8);
+  /* Modern browsers */
   background: rgba(0, 0, 0, 0.03);
+  /* Add all vendor prefixes for backdrop-filter */
+  -webkit-backdrop-filter: blur(16px);
+  -moz-backdrop-filter: blur(16px);
+  -ms-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  /* Ensure the blur works in Firefox */
+  @supports (-moz-appearance:none) {
+    background: rgba(0, 0, 0, 0.8);
+  }
 }
 </style>
 
