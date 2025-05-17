@@ -84,13 +84,13 @@ const navItems = [
 /* Only keeping necessary custom CSS that can't be achieved with Tailwind */
 .nav-background {
   @apply transition-all duration-300;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 :global(.dark) .nav-background {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.03);
 }
 </style>
 
