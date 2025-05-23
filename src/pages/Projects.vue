@@ -38,12 +38,13 @@
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 [&>*]:break-inside-avoid">
         <ProjectCard
           v-for="project in filteredProjects"
           :key="project.id"
           :project="project"
           :show-category="true"
+          class="mb-8"
         />
       </div>
     </div>
@@ -57,6 +58,9 @@ import stoaCoffeeImage from '../assets/projects/stoa-coffee.png'
 import sortieasyImage from '../assets/projects/sortieasy.png'
 import episodeOneImage from '../assets/projects/episode.one.png'
 import portfolioImage from '../assets/projects/portfolioImage.png'
+import acmastersImage from '../assets/projects/acmasters.png'
+import platoSpotImage from '../assets/projects/plato-spot.png'
+import kazakhstanImage from '../assets/projects/beauty-of-kazakhstan.png'
 
 interface Project {
   id: number
@@ -72,33 +76,63 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
+    title: "Beauty of Kazakhstan: Cultural Landing Page",
+    description: "An immersive landing page showcasing Kazakhstan's rich culture, cuisine, attractions, and activities. Features include interactive sections for traditional dishes, popular tourist destinations, leisure activities, and cultural insights. Built with a focus on visual storytelling and user engagement.",
+    category: "frontend",
+    technologies: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],
+    image: kazakhstanImage,
+    liveUrl: "https://aandrewjuan1.github.io/beauty_of_kazakhstan/",
+    githubUrl: "https://github.com/aandrewjuan1/beauty_of_kazakhstan"
+  },
+  {
+    id: 2,
+    title: "Plato Spot: Filipino Restaurant Website",
+    description: "A modern restaurant website featuring a menu section and simple POS system for a Filipino restaurant. Includes responsive design, menu filtering, cart functionality, and an about section showcasing the restaurant's story and best-selling dishes.",
+    category: "frontend",
+    technologies: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],
+    image: platoSpotImage,
+    liveUrl: "https://aandrewjuan1.github.io/plato.spot/",
+    githubUrl: "https://github.com/aandrewjuan1/plato.spot"
+  },
+  {
+    id: 3,
+    title: "ACMASTERS Landing Page",
+    description: "A modern, responsive landing page for an air conditioning business. Features include service showcases, customer testimonials, FAQ section, and a contact form. Built with a focus on user experience and conversion optimization.",
+    category: "frontend",
+    technologies: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],
+    image: acmastersImage,
+    liveUrl: "https://aandrewjuan1.github.io/acmasters/",
+    githubUrl: "https://github.com/aandrewjuan1/acmasters"
+  },
+  {
+    id: 4,
     title: "Dynamic Shop Platform",
     description: "Built a dynamic shopping cart and checkout system with real-time inventory management. Features include responsive product listings, seamless user interactions without page reloads, and modern UI design.",
     category: "fullstack",
-    technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML/CSS"],
+    technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML", "CSS"],
     image: stoaCoffeeImage,
     githubUrl: "https://github.com/aandrewjuan1/stoa-coffee"
   },
   {
-    id: 2,
-    title: "Inventory System with ML",
+    id: 5,
+    title: "sortieasy: Inventory System with ML",
     description: "Developed an intelligent inventory tracking system with machine learning capabilities. Features include ML-based demand forecasting, real-time alert dashboards, and Python integration for predictive analytics.",
     category: "fullstack",
-    technologies: ["Laravel", "Livewire", "Python", "MySQL", "Alpine.js", "HTML/CSS"],
+    technologies: ["Laravel", "Livewire", "Python", "MySQL", "Alpine.js", "HTML", "CSS"],
     image: sortieasyImage,
     githubUrl: "https://github.com/aandrewjuan1/sortieasy"
   },
   {
-    id: 3,
-    title: "Media Listing Platform",
+    id: 6,
+    title: "episode.one: Media Listing Platform",
     description: "Created a personal media tracking application for books, anime, and movies. Features include advanced filtering, categorization, status tracking, and a clean, responsive interface.",
     category: "fullstack",
-    technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML/CSS"],
+    technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML", "CSS"],
     image: episodeOneImage,
     githubUrl: "https://github.com/aandrewjuan1/episode.one"
   },
   {
-    id: 4,
+    id: 7,
     title: "Portfolio Website",
     description: "A modern, responsive portfolio website built with Vue 3, TypeScript, and Tailwind CSS. Features dark mode, smooth animations, and a clean design.",
     category: "frontend",

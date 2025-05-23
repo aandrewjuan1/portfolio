@@ -1,24 +1,24 @@
 <template>
-  <div class="relative group">
+  <div class="relative group w-full">
     <!-- Card Background with Gradient Border -->
     <div class="absolute inset-0 bg-gradient-to-br from-wine/5 to-viridian/5 dark:from-wine/10 dark:to-viridian/10 rounded-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"></div>
     <div class="absolute inset-0 bg-gradient-to-br from-wine/10 to-viridian/10 dark:from-wine/20 dark:to-viridian/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
     <!-- Card Content -->
-    <div class="relative p-6 space-y-6">
+    <div class="relative p-6 space-y-6 h-full">
       <!-- Project Image with Gradient Overlay -->
-      <div class="relative overflow-hidden rounded-xl group/image">
+      <div class="relative overflow-hidden rounded-xl group/image aspect-[16/9] w-full">
         <!-- Gradient Overlay -->
         <div class="absolute inset-0 bg-gradient-to-br from-viridian/20 via-transparent to-wine/20 dark:from-wine/20 dark:to-viridian/20 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
         <img
           :src="project.image"
           :alt="project.title"
-          class="w-full h-48 object-cover transform transition-all duration-700 group-hover/image:scale-105"
+          class="w-full h-full object-cover transform transition-all duration-700 group-hover/image:scale-105"
         />
       </div>
 
       <!-- Project Info -->
-      <div class="space-y-4">
+      <div class="space-y-4 flex-grow">
         <div class="flex items-center justify-between">
           <h3 class="text-xl font-mono text-rich-black dark:text-mint-green-100 relative z-10">
             {{ project.title }}
@@ -42,18 +42,18 @@
           <span
             v-for="tech in project.technologies"
             :key="tech"
-            class="px-3 py-1 bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 text-wine dark:text-viridian rounded-full text-sm font-mono transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1"
+            class="px-3 py-1 bg-white/60 dark:bg-rich-black-300/80 backdrop-blur-sm border border-viridian/10 dark:border-viridian/20 text-viridian-600 dark:text-viridian-200 rounded-full text-sm font-mono transition-all duration-300 hover:bg-viridian/5 dark:hover:bg-viridian/10 hover:translate-x-1"
           >
             {{ tech }}
           </span>
         </div>
-        <div class="flex flex-wrap items-center gap-3 mt-4">
+        <div class="flex flex-wrap items-center gap-3 mt-4 flex-grow">
           <a
             v-if="project.liveUrl"
             :href="project.liveUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-2.5 bg-viridian/10 dark:bg-wine/10 hover:bg-viridian/20 dark:hover:bg-wine/20 text-viridian dark:text-wine rounded-lg font-mono text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg group min-w-[140px] justify-center"
+            class="inline-flex items-center gap-2 px-6 py-2.5 bg-viridian/20 dark:bg-wine/20 hover:bg-viridian/30 dark:hover:bg-wine/30 text-viridian-900 dark:text-wine-100 rounded-lg font-mono text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg group min-w-[140px] justify-center"
           >
             <span>Live Demo</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
@@ -66,7 +66,7 @@
             :href="project.githubUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-2.5 bg-wine/10 dark:bg-viridian/10 hover:bg-wine/20 dark:hover:bg-viridian/20 text-wine dark:text-viridian rounded-lg font-mono text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg group min-w-[140px] justify-center"
+            class="inline-flex items-center gap-2 px-6 py-2.5 bg-wine/20 dark:bg-viridian/20 hover:bg-wine/30 dark:hover:bg-viridian/30 text-wine-900 dark:text-viridian-100 rounded-lg font-mono text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg group min-w-[140px] justify-center"
           >
             <i class="fab fa-github text-lg"></i>
             <span>View Code</span>
