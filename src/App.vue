@@ -5,7 +5,7 @@ import ScrollProgress from './components/common/ScrollProgress.vue'
 </script>
 
 <template>
-    <div class="min-h-screen font-primary bg-mint-green/95 dark:bg-rich-black/95 text-rich-black dark:text-mint-green transition-colors duration-200 relative overflow-hidden">
+    <div class="min-h-screen flex flex-col font-primary bg-mint-green/95 dark:bg-rich-black/95 text-rich-black dark:text-mint-green transition-colors duration-200 relative overflow-hidden">
         <ScrollProgress />
         <!-- Subtle animated background elements -->
         <div class="absolute inset-0 overflow-hidden">
@@ -16,10 +16,10 @@ import ScrollProgress from './components/common/ScrollProgress.vue'
             </div>
         </div>
         <Navbar />
-        <main class="relative">
+        <main class="relative flex-grow">
             <router-view />
         </main>
-        <Footer />
+        <Footer class="mt-auto" />
     </div>
 </template>
 

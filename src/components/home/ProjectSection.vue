@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import ProjectCard from '../ProjectCard.vue'
 import stoaCoffeeImage from '../../assets/projects/stoa-coffee.png'
 import sortieasyImage from '../../assets/projects/sortieasy.png'
 import episodeOneImage from '../../assets/projects/episode.one.png'
@@ -22,7 +23,6 @@ const projects = ref<Project[]>([
     description: "Built a dynamic shopping cart and checkout system with real-time inventory management. Features include responsive product listings, seamless user interactions without page reloads, and modern UI design.",
     image: stoaCoffeeImage,
     technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML/CSS"],
-    liveUrl: "#",
     githubUrl: "https://github.com/aandrewjuan1/stoa-coffee"
   },
   {
@@ -31,7 +31,6 @@ const projects = ref<Project[]>([
     description: "Developed an intelligent inventory tracking system with machine learning capabilities. Features include ML-based demand forecasting, real-time alert dashboards, and Python integration for predictive analytics.",
     image: sortieasyImage,
     technologies: ["Laravel", "Livewire", "Python", "MySQL", "Alpine.js", "HTML/CSS"],
-    liveUrl: "#",
     githubUrl: "https://github.com/aandrewjuan1/sortieasy"
   },
   {
@@ -40,7 +39,6 @@ const projects = ref<Project[]>([
     description: "Created a personal media tracking application for books, anime, and movies. Features include advanced filtering, categorization, status tracking, and a clean, responsive interface.",
     image: episodeOneImage,
     technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML/CSS"],
-    liveUrl: "#",
     githubUrl: "https://github.com/aandrewjuan1/episode.one"
   }
 ])
@@ -117,51 +115,12 @@ onMounted(() => {
 
         <!-- Projects Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <div v-for="project in projects" :key="project.id"
-               class="relative group">
-            <!-- Card Background with Gradient Border -->
-            <div class="absolute inset-0 bg-gradient-to-br from-wine/5 to-viridian/5 dark:from-wine/10 dark:to-viridian/10 rounded-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"></div>
-            <div class="absolute inset-0 bg-gradient-to-br from-wine/10 to-viridian/10 dark:from-wine/20 dark:to-viridian/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-            <!-- Card Content -->
-            <div class="relative p-6 space-y-6">
-              <!-- Project Image with Gradient Overlay -->
-              <div class="relative overflow-hidden rounded-xl group/image">
-                <!-- Gradient Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-br from-viridian/20 via-transparent to-wine/20 dark:from-wine/20 dark:to-viridian/20 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
-                <img :src="project.image" :alt="project.title"
-                     class="w-full h-48 object-cover transform transition-all duration-700 group-hover/image:scale-105">
-              </div>
-
-              <!-- Project Info -->
-              <div class="space-y-4">
-                <h3 class="text-xl font-mono text-rich-black dark:text-mint-green-100 relative z-10">
-                  {{ project.title }}
-                </h3>
-                <p class="text-rich-black-300 dark:text-mint-green-300">
-                  {{ project.description }}
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span v-for="tech in project.technologies" :key="tech"
-                        class="px-3 py-1 bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 text-wine dark:text-viridian rounded-full text-sm font-mono transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1">
-                    {{ tech }}
-                  </span>
-                </div>
-                <div class="flex gap-4">
-                  <a v-if="project.githubUrl" :href="project.githubUrl"
-                     class="inline-flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 text-wine dark:text-viridian rounded-full font-mono text-sm transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/link"
-                     target="_blank">
-                    <i class="fab fa-github"></i>
-                    <span>GitHub</span>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Decorative Elements -->
-              <div class="absolute -top-6 -right-6 w-12 h-12 border-2 border-dashed border-wine/20 dark:border-viridian/20 rounded-full animate-spin-slow"></div>
-              <div class="absolute -bottom-6 -left-6 w-8 h-8 border-2 border-dotted border-viridian/20 dark:border-wine/20 rounded-full animate-spin-slow-reverse"></div>
-            </div>
-          </div>
+          <ProjectCard
+            v-for="project in projects"
+            :key="project.id"
+            :project="project"
+            :show-category="false"
+          />
         </div>
 
         <!-- Learn More Button -->

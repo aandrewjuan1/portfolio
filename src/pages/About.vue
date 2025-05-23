@@ -15,7 +15,7 @@
     <div class="relative w-[90%] md:w-[80%] lg:w-[70%] mx-auto py-36">
       <!-- Header Section -->
       <div class="text-center space-y-4">
-        <h1 class="text-5xl font-mono text-rich-black dark:text-mint-green-100">Andrew Juan</h1>
+        <h1 class="text-5xl font-mono text-rich-black dark:text-mint-green-100">About Me</h1>
         <div class="flex flex-wrap justify-center gap-4 text-rich-black-300 dark:text-mint-green-300">
           <a href="mailto:aandrewjuan2@gmail.com" class="flex items-center gap-2 hover:text-wine dark:hover:text-viridian transition-colors">
             <i class="fas fa-envelope"></i>
@@ -41,7 +41,7 @@
             <div class="space-y-8">
               <div class="space-y-6">
                 <h2 class="text-3xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">
-                  About Me
+                  Andrew Juan
                   <span class="absolute left-0 -bottom-2 w-16 h-1 bg-wine dark:bg-viridian rounded"></span>
                 </h2>
                 <p class="text-lg leading-relaxed text-rich-black-300 dark:text-mint-green-300 font-primary">

@@ -5,12 +5,11 @@
       <div class="relative z-10 w-full max-w-7xl mx-auto px-4 py-36 sm:px-6 lg:px-8">
         <div class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto">
           <!-- Section Header -->
-          <div class="text-center mb-16 relative">
+          <div class="text-center space-y-4 mb-16 relative">
             <h1 class="text-5xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">
               Contact Me
-              <span class="absolute left-0 -bottom-3 w-16 h-1 bg-wine dark:bg-viridian rounded transform transition-all duration-300 group-hover:w-24"></span>
             </h1>
-            <p class="mt-6 text-lg text-rich-black-300 dark:text-mint-green-300 max-w-2xl mx-auto">
+            <p class="text-lg text-rich-black-300 dark:text-mint-green-300 max-w-2xl mx-auto">
               Feel free to reach out to me at <a href="mailto:andrewjuan2@gmail.com" class="text-wine dark:text-viridian hover:underline">andrewjuan2@gmail.com</a>
             </p>
           </div>

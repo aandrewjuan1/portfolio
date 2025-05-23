@@ -1,18 +1,27 @@
 <template>
-  <div class="projects min-h-screen py-16 px-4 sm:px-6 lg:px-8">
-    <!-- Header Section -->
-    <div class="max-w-7xl mx-auto mb-12">
-      <h1 class="text-4xl font-mono font-bold text-rich-black dark:text-mint-green mb-4">
-        Projects
-      </h1>
-      <p class="text-lg text-rich-black-300 dark:text-mint-green-300 max-w-3xl">
-        A collection of my work, showcasing both frontend and full-stack projects. Each project represents a unique challenge and learning opportunity.
-      </p>
+  <div class="min-h-screen">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 w-[100vw] overflow-hidden pointer-events-none">
+      <!-- Subtle Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-wine/5 via-transparent to-viridian/5 dark:from-wine/10 dark:via-transparent dark:to-viridian/10"></div>
+
+      <!-- Minimal Floating Dots -->
+      <div class="absolute top-1/4 left-10 w-1.5 h-1.5 bg-wine/10 dark:bg-viridian/10 rounded-full animate-float"></div>
+      <div class="absolute bottom-1/3 right-20 w-1 h-1 bg-viridian/10 dark:bg-wine/10 rounded-full animate-float-delayed"></div>
     </div>
 
-    <!-- Category Filter -->
-    <div class="max-w-7xl mx-auto mb-12">
-      <div class="flex flex-wrap gap-4">
+    <!-- Contained Content -->
+    <div class="relative w-[90%] md:w-[80%] lg:w-[70%] mx-auto py-36">
+      <!-- Header Section -->
+      <div class="text-center space-y-4 mb-16">
+        <h1 class="text-5xl font-mono text-rich-black dark:text-mint-green-100">Projects</h1>
+        <p class="text-lg text-rich-black-300 dark:text-mint-green-300 max-w-3xl mx-auto">
+          A collection of my work, showcasing both frontend and full-stack projects.
+        </p>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap justify-center gap-4 mb-16">
         <button
           v-for="category in categories"
           :key="category.id"
@@ -21,94 +30,21 @@
           :class="[
             activeCategory === category.id
               ? 'bg-wine text-mint-green-100'
-              : 'bg-mint-green-300 dark:bg-rich-black-300 text-rich-black dark:text-mint-green hover:bg-wine-300 dark:hover:bg-wine-700 hover:text-mint-green-100'
+              : 'bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 text-wine dark:text-viridian hover:bg-wine/5 dark:hover:bg-viridian/5'
           ]"
         >
           {{ category.label }}
         </button>
       </div>
-    </div>
 
-    <!-- Projects Grid -->
-    <div class="max-w-7xl mx-auto">
+      <!-- Projects Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div
+        <ProjectCard
           v-for="project in filteredProjects"
           :key="project.id"
-          class="group relative bg-mint-green-100 dark:bg-rich-black-300 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-        >
-          <!-- Project Image -->
-          <div class="aspect-video relative overflow-hidden">
-            <img
-              :src="project.imageUrl"
-              :alt="project.title"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-rich-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-
-          <!-- Project Content -->
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-xl font-mono font-bold text-rich-black dark:text-mint-green">
-                {{ project.title }}
-              </h3>
-              <span
-                class="px-3 py-1 text-xs font-mono rounded-full"
-                :class="[
-                  project.category === 'frontend'
-                    ? 'bg-viridian-300 text-viridian-900'
-                    : 'bg-wine-300 text-wine-900'
-                ]"
-              >
-                {{ project.category }}
-              </span>
-            </div>
-
-            <p class="text-rich-black-300 dark:text-mint-green-300 mb-4">
-              {{ project.description }}
-            </p>
-
-            <!-- Technologies -->
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span
-                v-for="tech in project.technologies"
-                :key="tech"
-                class="px-2 py-1 text-xs font-mono bg-mint-green-300 dark:bg-rich-black-700 text-rich-black dark:text-mint-green rounded"
-              >
-                {{ tech }}
-              </span>
-            </div>
-
-            <!-- Project Links -->
-            <div class="flex gap-4">
-              <a
-                v-if="project.liveUrl"
-                :href="project.liveUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-2 text-wine hover:text-wine-700 dark:text-wine-300 dark:hover:text-wine-100 transition-colors"
-              >
-                <span class="font-mono text-sm">Live Demo</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                  <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                </svg>
-              </a>
-              <a
-                :href="project.githubUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-2 text-wine hover:text-wine-700 dark:text-wine-300 dark:hover:text-wine-100 transition-colors"
-              >
-                <span class="font-mono text-sm">GitHub</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
+          :project="project"
+          :show-category="true"
+        />
       </div>
     </div>
   </div>
@@ -116,6 +52,11 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import ProjectCard from '../components/ProjectCard.vue'
+import stoaCoffeeImage from '../assets/projects/stoa-coffee.png'
+import sortieasyImage from '../assets/projects/sortieasy.png'
+import episodeOneImage from '../assets/projects/episode.one.png'
+import portfolioImage from '../assets/projects/portfolioImage.png'
 
 interface Project {
   id: number
@@ -123,7 +64,7 @@ interface Project {
   description: string
   category: 'frontend' | 'fullstack'
   technologies: string[]
-  imageUrl: string
+  image: string
   liveUrl?: string
   githubUrl: string
 }
@@ -131,15 +72,41 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
+    title: "Dynamic Shop Platform",
+    description: "Built a dynamic shopping cart and checkout system with real-time inventory management. Features include responsive product listings, seamless user interactions without page reloads, and modern UI design.",
+    category: "fullstack",
+    technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML/CSS"],
+    image: stoaCoffeeImage,
+    githubUrl: "https://github.com/aandrewjuan1/stoa-coffee"
+  },
+  {
+    id: 2,
+    title: "Inventory System with ML",
+    description: "Developed an intelligent inventory tracking system with machine learning capabilities. Features include ML-based demand forecasting, real-time alert dashboards, and Python integration for predictive analytics.",
+    category: "fullstack",
+    technologies: ["Laravel", "Livewire", "Python", "MySQL", "Alpine.js", "HTML/CSS"],
+    image: sortieasyImage,
+    githubUrl: "https://github.com/aandrewjuan1/sortieasy"
+  },
+  {
+    id: 3,
+    title: "Media Listing Platform",
+    description: "Created a personal media tracking application for books, anime, and movies. Features include advanced filtering, categorization, status tracking, and a clean, responsive interface.",
+    category: "fullstack",
+    technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML/CSS"],
+    image: episodeOneImage,
+    githubUrl: "https://github.com/aandrewjuan1/episode.one"
+  },
+  {
+    id: 4,
     title: "Portfolio Website",
     description: "A modern, responsive portfolio website built with Vue 3, TypeScript, and Tailwind CSS. Features dark mode, smooth animations, and a clean design.",
     category: "frontend",
     technologies: ["Vue 3", "TypeScript", "Tailwind CSS", "Vite"],
-    imageUrl: "/projects/portfolio.png",
-    liveUrl: "https://your-portfolio-url.com",
+    image: portfolioImage,
+    liveUrl: "https://aandrewjuan1.github.io/portfolio/",
     githubUrl: "https://github.com/yourusername/portfolio"
-  },
-  // Add more projects here as needed
+  }
 ]
 
 const activeCategory = ref<'all' | 'frontend' | 'fullstack'>('all')
@@ -163,5 +130,41 @@ const categories = [
 
 .dark .projects {
   background-color: var(--color-rich-black-700);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-5deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 25s linear infinite;
 }
 </style>
