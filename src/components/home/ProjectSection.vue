@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import stoaCoffeeImage from '../../assets/projects/stoa-coffee.png'
+import sortieasyImage from '../../assets/projects/sortieasy.png'
+import episodeOneImage from '../../assets/projects/episode.one.png'
 
 interface Project {
   id: number
@@ -17,28 +20,28 @@ const projects = ref<Project[]>([
     id: 1,
     title: "Dynamic Shop Platform",
     description: "Built a dynamic shopping cart and checkout system with real-time inventory management. Features include responsive product listings, seamless user interactions without page reloads, and modern UI design.",
-    image: "https://placehold.co/600x400/2563eb/ffffff?text=Shop+Platform",
+    image: stoaCoffeeImage,
     technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML/CSS"],
     liveUrl: "#",
-    githubUrl: "#"
+    githubUrl: "https://github.com/aandrewjuan1/stoa-coffee"
   },
   {
     id: 2,
     title: "Inventory System with ML",
     description: "Developed an intelligent inventory tracking system with machine learning capabilities. Features include ML-based demand forecasting, real-time alert dashboards, and Python integration for predictive analytics.",
-    image: "https://placehold.co/600x400/7c3aed/ffffff?text=ML+Inventory",
+    image: sortieasyImage,
     technologies: ["Laravel", "Livewire", "Python", "MySQL", "Alpine.js", "HTML/CSS"],
     liveUrl: "#",
-    githubUrl: "#"
+    githubUrl: "https://github.com/aandrewjuan1/sortieasy"
   },
   {
     id: 3,
     title: "Media Listing Platform",
     description: "Created a personal media tracking application for books, anime, and movies. Features include advanced filtering, categorization, status tracking, and a clean, responsive interface.",
-    image: "https://placehold.co/600x400/059669/ffffff?text=Media+Tracker",
+    image: episodeOneImage,
     technologies: ["Laravel", "Livewire", "Tailwind CSS", "MySQL", "Alpine.js", "HTML/CSS"],
     liveUrl: "#",
-    githubUrl: "#"
+    githubUrl: "https://github.com/aandrewjuan1/episode.one"
   }
 ])
 
@@ -136,13 +139,13 @@ onMounted(() => {
                 </span>
               </div>
               <div class="flex gap-4">
-                <a v-if="project.liveUrl" :href="project.liveUrl"
+                <!-- <a v-if="project.liveUrl" :href="project.liveUrl"
                    class="inline-flex items-center gap-2 px-4 py-2 bg-wine dark:bg-mint-green text-mint-green-100 dark:text-rich-black rounded-full font-mono text-sm transition-all duration-300 hover:-translate-y-1 hover:bg-wine-700 dark:hover:bg-mint-green-700 hover:shadow-lg group/link relative overflow-hidden"
                    target="_blank">
                   <span class="relative z-10">Live Demo</span>
                   <span class="relative z-10 transition-transform duration-300 group-hover/link:translate-x-1">→</span>
                   <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/link:translate-x-full transition-transform duration-700"></div>
-                </a>
+                </a> -->
                 <a v-if="project.githubUrl" :href="project.githubUrl"
                    class="inline-flex items-center gap-2 px-4 py-2 border-2 border-wine dark:border-mint-green text-wine dark:text-mint-green rounded-full font-mono text-sm transition-all duration-300 hover:-translate-y-1 hover:bg-wine/5 dark:hover:bg-mint-green/5 hover:shadow-lg"
                    target="_blank">
