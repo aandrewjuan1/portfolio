@@ -47,7 +47,7 @@
             <div class="absolute -bottom-8 -left-8 w-12 h-12 border-2 border-dotted border-viridian/20 dark:border-wine/20 rounded-full animate-spin-slow-reverse"></div>
 
             <!-- Main Image Frame -->
-            <div class="relative w-full max-w-[400px] mx-auto">
+            <div class="relative w-full max-w-[300px] mx-auto">
               <!-- Decorative Border Elements -->
               <div class="absolute -top-6 -left-6 w-24 h-24 border-4 border-viridian dark:border-wine rounded-lg transform -rotate-12 transition-transform duration-500 hover:rotate-0"></div>
               <div class="absolute -bottom-6 -right-6 w-24 h-24 border-4 border-wine dark:border-viridian rounded-lg transform rotate-12 transition-transform duration-500 hover:rotate-0"></div>
@@ -197,7 +197,7 @@
 </template>
 
 <script setup lang="ts">
-import profileImage from '../../assets/about/profileImage.jpg'
+import profileImage from '../../assets/about/profileImage.png'
 
 // Add keyframes for floating animation and new animations
 const style = document.createElement('style')

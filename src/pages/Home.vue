@@ -10,6 +10,9 @@
 
     <!-- Project Section - full width background with contained content -->
     <ProjectSection />
+
+    <!-- Contact Section - full width background with contained content -->
+    <ContactSection />
   </div>
 </template>
 
@@ -17,4 +20,5 @@
 import Hero from '../components/home/Hero.vue'
 import AboutSection from '../components/home/AboutSection.vue'
 import ProjectSection from '../components/home/ProjectSection.vue'
+import ContactSection from '../components/home/ContactSection.vue'
 </script>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Navbar from './components/layout/Navbar.vue'
+import Footer from './components/layout/Footer.vue'
 import ScrollProgress from './components/common/ScrollProgress.vue'
 </script>
 
@@ -15,7 +16,10 @@ import ScrollProgress from './components/common/ScrollProgress.vue'
             </div>
         </div>
         <Navbar />
-        <router-view />
+        <main class="relative">
+            <router-view />
+        </main>
+        <Footer />
     </div>
 </template>
 
