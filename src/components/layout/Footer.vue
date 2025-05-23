@@ -9,7 +9,7 @@ if (!document.querySelector('link[href*="font-awesome"]')) {
 </script>
 
 <template>
-  <footer class="relative border-t border-rich-black/10 dark:border-mint-green/10">
+  <footer class="w-full bg-mint-green/95 dark:bg-rich-black/95 border-t border-rich-black/10 dark:border-mint-green/10">
     <!-- Decorative top border -->
     <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rich-black/20 dark:via-mint-green/20 to-transparent"></div>
 
@@ -81,6 +81,14 @@ if (!document.querySelector('link[href*="font-awesome"]')) {
 </template>
 
 <style scoped>
+footer {
+  position: relative;
+  z-index: 10;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 .router-link-active {
   color: var(--color-rich-black);
   font-weight: 500;

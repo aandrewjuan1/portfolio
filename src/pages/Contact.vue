@@ -1,5 +1,5 @@
 <template>
-  <div class="contact min-h-screen">
+  <div class="contact min-h-screen flex flex-col">
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
       <!-- Content Container -->
       <div class="relative z-10 w-full max-w-7xl mx-auto px-4 py-36 sm:px-6 lg:px-8">
@@ -86,11 +86,15 @@
         </div>
       </div>
     </section>
+
+    <!-- Footer -->
+    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import Footer from '../components/layout/Footer.vue'
 
 const form = ref({
   name: '',

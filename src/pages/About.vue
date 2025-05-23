@@ -1,6 +1,6 @@
 <template>
   <!-- Full Width Background -->
-  <div class="min-h-screen">
+  <div class="min-h-screen flex flex-col">
     <!-- Background Pattern -->
     <div class="absolute inset-0 w-[100vw] overflow-hidden pointer-events-none">
       <!-- Subtle Gradient Overlay -->
@@ -12,7 +12,7 @@
     </div>
 
     <!-- Contained Content -->
-    <div class="relative w-[90%] md:w-[80%] lg:w-[70%] mx-auto py-36">
+    <div class="relative w-[90%] md:w-[80%] lg:w-[70%] mx-auto py-36 flex-1">
       <!-- Header Section -->
       <div class="text-center space-y-4">
         <h1 class="text-5xl font-mono text-rich-black dark:text-mint-green-100">About Me</h1>
@@ -367,11 +367,15 @@
         </section>
       </div>
     </div>
+
+    <!-- Footer -->
+    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
 import profileImage from '../assets/about/profileImage.png'
+import Footer from '../components/layout/Footer.vue'
 
 // Add keyframes for floating animation and new animations
 const style = document.createElement('style')
