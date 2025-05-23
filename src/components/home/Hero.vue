@@ -59,11 +59,6 @@
             <i class="fab fa-linkedin text-3xl mb-2"></i>
             <span class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">LinkedIn</span>
           </a>
-          <a href="https://twitter.com/twitter" target="_blank" rel="noopener noreferrer"
-             class="group flex flex-col items-center text-[var(--color-rich-black)] dark:text-[var(--color-viridian-300)] hover:text-[var(--color-wine)] dark:hover:text-[var(--color-mint-green)] transition-all duration-300">
-            <i class="fab fa-twitter text-3xl mb-2"></i>
-            <span class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Twitter</span>
-          </a>
         </div>
       </div>
     </div>

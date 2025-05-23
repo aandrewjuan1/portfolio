@@ -66,23 +66,19 @@
           <div class="mt-12 text-center">
             <h3 class="text-2xl font-mono text-rich-black dark:text-mint-green-100 mb-6">Connect with Me</h3>
             <div class="flex justify-center gap-6">
-              <a href="#" class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
+              <a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer"
+                 class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
                 <div class="w-12 h-12 rounded-full bg-wine/10 dark:bg-viridian/10 flex items-center justify-center group-hover:bg-wine/20 dark:group-hover:bg-viridian/20 transition-colors duration-300">
                   <i class="fab fa-github text-xl"></i>
                 </div>
                 <span class="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">GitHub</span>
               </a>
-              <a href="#" class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
+              <a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer"
+                 class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
                 <div class="w-12 h-12 rounded-full bg-wine/10 dark:bg-viridian/10 flex items-center justify-center group-hover:bg-wine/20 dark:group-hover:bg-viridian/20 transition-colors duration-300">
                   <i class="fab fa-linkedin text-xl"></i>
                 </div>
                 <span class="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">LinkedIn</span>
-              </a>
-              <a href="#" class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
-                <div class="w-12 h-12 rounded-full bg-wine/10 dark:bg-viridian/10 flex items-center justify-center group-hover:bg-wine/20 dark:group-hover:bg-viridian/20 transition-colors duration-300">
-                  <i class="fab fa-twitter text-xl"></i>
-                </div>
-                <span class="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Twitter</span>
               </a>
             </div>
           </div>

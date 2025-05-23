@@ -53,17 +53,13 @@ if (!document.querySelector('link[href*="font-awesome"]')) {
               <span>andrewjuan2@gmail.com</span>
             </a>
             <div class="flex space-x-4 pt-2">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer"
                  class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">
                 <i class="fab fa-github text-xl"></i>
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer"
                  class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">
                 <i class="fab fa-linkedin text-xl"></i>
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                 class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">
-                <i class="fab fa-twitter text-xl"></i>
               </a>
             </div>
           </div>
