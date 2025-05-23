@@ -143,7 +143,7 @@ const projects: Project[] = [
     technologies: ["Vue 3", "TypeScript", "Tailwind CSS", "Vite"],
     image: portfolioImage,
     liveUrl: "https://aandrewjuan1.github.io/portfolio/",
-    githubUrl: "https://github.com/yourusername/portfolio"
+    githubUrl: "https://github.com/aandrewjuan1/portfolio"
   }
 ]
 
