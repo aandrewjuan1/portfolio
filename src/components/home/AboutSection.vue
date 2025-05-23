@@ -74,17 +74,7 @@
           </div>
         </div>
 
-        <!-- Skills Section -->
-        <div class="space-y-8 relative">
-          <!-- Decorative Line -->
-          <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-wine/30 dark:via-viridian/30 to-transparent"></div>
-
-          <div class="flex items-center justify-between">
-            <div class="space-y-2">
-              <h3 class="text-2xl font-mono text-rich-black dark:text-mint-green-100">My Skills</h3>
-              <div class="w-16 h-1 bg-wine/60 dark:bg-viridian/60 rounded-full"></div>
-            </div>
-            <router-link
+        <router-link
               to="/about"
               class="inline-flex items-center gap-2 px-6 py-3 bg-wine dark:bg-viridian text-mint-green-100 rounded-full font-mono font-medium transition-all duration-300 hover:-translate-y-1 hover:bg-wine-700 dark:hover:bg-viridian-700 hover:shadow-lg group relative overflow-hidden"
             >
@@ -92,6 +82,18 @@
               <span class="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
               <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </router-link>
+
+        <!-- Skills Section -->
+        <div class="space-y-8 relative">
+          <!-- Decorative Line -->
+          <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-wine/30 dark:via-viridian/30 to-transparent"></div>
+
+          <div class="flex flex-col items-center space-y-6">
+            <div class="space-y-2 text-center">
+              <h3 class="text-2xl font-mono text-rich-black dark:text-mint-green-100">My Skills</h3>
+              <div class="w-16 h-1 bg-wine/60 dark:bg-viridian/60 rounded-full mx-auto"></div>
+            </div>
+
           </div>
 
           <!-- Skills Categories -->

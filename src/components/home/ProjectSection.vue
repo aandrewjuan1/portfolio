@@ -118,41 +118,48 @@ onMounted(() => {
         <!-- Projects Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <div v-for="project in projects" :key="project.id"
-               class="bg-mint-green-100 dark:bg-rich-black-300 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-[1.02] group">
-            <!-- Project Image with Gradient Overlay -->
-            <div class="relative overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-br from-wine/20 via-transparent to-mint-green/20 dark:from-mint-green/20 dark:to-wine/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <img :src="project.image" :alt="project.title"
-                   class="w-full h-48 object-cover transform transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-mono font-semibold mb-2 text-rich-black dark:text-mint-green-100">
-                {{ project.title }}
-              </h3>
-              <p class="text-rich-black-300 dark:text-mint-green-300 mb-4">
-                {{ project.description }}
-              </p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span v-for="tech in project.technologies" :key="tech"
-                      class="px-3 py-1 bg-wine/10 dark:bg-mint-green/10 text-wine dark:text-mint-green rounded-full text-sm font-mono">
-                  {{ tech }}
-                </span>
+               class="relative group">
+            <!-- Card Background with Gradient Border -->
+            <div class="absolute inset-0 bg-gradient-to-br from-wine/5 to-viridian/5 dark:from-wine/10 dark:to-viridian/10 rounded-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-wine/10 to-viridian/10 dark:from-wine/20 dark:to-viridian/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <!-- Card Content -->
+            <div class="relative p-6 space-y-6">
+              <!-- Project Image with Gradient Overlay -->
+              <div class="relative overflow-hidden rounded-xl group/image">
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-br from-viridian/20 via-transparent to-wine/20 dark:from-wine/20 dark:to-viridian/20 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
+                <img :src="project.image" :alt="project.title"
+                     class="w-full h-48 object-cover transform transition-all duration-700 group-hover/image:scale-105">
               </div>
-              <div class="flex gap-4">
-                <!-- <a v-if="project.liveUrl" :href="project.liveUrl"
-                   class="inline-flex items-center gap-2 px-4 py-2 bg-wine dark:bg-mint-green text-mint-green-100 dark:text-rich-black rounded-full font-mono text-sm transition-all duration-300 hover:-translate-y-1 hover:bg-wine-700 dark:hover:bg-mint-green-700 hover:shadow-lg group/link relative overflow-hidden"
-                   target="_blank">
-                  <span class="relative z-10">Live Demo</span>
-                  <span class="relative z-10 transition-transform duration-300 group-hover/link:translate-x-1">→</span>
-                  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/link:translate-x-full transition-transform duration-700"></div>
-                </a> -->
-                <a v-if="project.githubUrl" :href="project.githubUrl"
-                   class="inline-flex items-center gap-2 px-4 py-2 border-2 border-wine dark:border-mint-green text-wine dark:text-mint-green rounded-full font-mono text-sm transition-all duration-300 hover:-translate-y-1 hover:bg-wine/5 dark:hover:bg-mint-green/5 hover:shadow-lg"
-                   target="_blank">
-                  <i class="fab fa-github"></i>
-                  <span>GitHub</span>
-                </a>
+
+              <!-- Project Info -->
+              <div class="space-y-4">
+                <h3 class="text-xl font-mono text-rich-black dark:text-mint-green-100 relative z-10">
+                  {{ project.title }}
+                </h3>
+                <p class="text-rich-black-300 dark:text-mint-green-300">
+                  {{ project.description }}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span v-for="tech in project.technologies" :key="tech"
+                        class="px-3 py-1 bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 text-wine dark:text-viridian rounded-full text-sm font-mono transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1">
+                    {{ tech }}
+                  </span>
+                </div>
+                <div class="flex gap-4">
+                  <a v-if="project.githubUrl" :href="project.githubUrl"
+                     class="inline-flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 text-wine dark:text-viridian rounded-full font-mono text-sm transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/link"
+                     target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                  </a>
+                </div>
               </div>
+
+              <!-- Decorative Elements -->
+              <div class="absolute -top-6 -right-6 w-12 h-12 border-2 border-dashed border-wine/20 dark:border-viridian/20 rounded-full animate-spin-slow"></div>
+              <div class="absolute -bottom-6 -left-6 w-8 h-8 border-2 border-dotted border-viridian/20 dark:border-wine/20 rounded-full animate-spin-slow-reverse"></div>
             </div>
           </div>
         </div>
