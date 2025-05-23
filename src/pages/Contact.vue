@@ -10,7 +10,7 @@
               Contact Me
             </h1>
             <p class="text-lg text-rich-black-300 dark:text-mint-green-300 max-w-2xl mx-auto">
-              Feel free to reach out to me at <a href="mailto:andrewjuan2@gmail.com" class="text-wine dark:text-viridian hover:underline">andrewjuan2@gmail.com</a>
+              Feel free to reach out to me at <a href="mailto:aandrewjuan2@gmail.com" class="text-wine dark:text-viridian hover:underline">aandrewjuan2@gmail.com</a>
             </p>
           </div>
 
