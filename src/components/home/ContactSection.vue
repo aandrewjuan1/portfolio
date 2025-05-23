@@ -10,7 +10,7 @@
             <span class="absolute left-0 -bottom-3 w-16 h-1 bg-wine dark:bg-viridian rounded transform transition-all duration-300 group-hover:w-24"></span>
           </h2>
           <p class="mt-6 text-lg text-rich-black-300 dark:text-mint-green-300 max-w-2xl mx-auto">
-            Feel free to reach out to me at <a href="mailto:andrewjuan2@gmail.com" class="text-wine dark:text-viridian hover:underline">andrewjuan2@gmail.com</a>
+            Feel free to reach out to me at <a href="mailto:aandrewjuan2@gmail.com" class="text-wine dark:text-viridian hover:underline">aandrewjuan2@gmail.com</a>
           </p>
         </div>
 

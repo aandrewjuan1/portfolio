@@ -50,7 +50,7 @@ if (!document.querySelector('link[href*="font-awesome"]')) {
             <a href="mailto:andrewjuan2@gmail.com"
                class="flex items-center space-x-2 text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">
               <i class="fas fa-envelope"></i>
-              <span>andrewjuan2@gmail.com</span>
+              <span>aandrewjuan2@gmail.com</span>
             </a>
             <div class="flex space-x-4 pt-2">
               <a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer"
