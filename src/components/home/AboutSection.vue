@@ -33,7 +33,7 @@
               </h2>
               <p class="text-lg leading-relaxed text-rich-black-300 dark:text-mint-green-300 font-primary max-w-2xl">
                 Motivated Computer Science undergraduate with hands-on experience building responsive,
-                interactive web applications. Seeking an internship role where I can contribute to both frontend
+                interactive web applications. Seeking a part-time web developer position where I can contribute to both frontend
                 and backend development. Passionate about clean code, user-focused design, and learning
                 modern web technologies in real-world environments.
               </p>

@@ -68,7 +68,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-const subtitleText = "CS Student | Full Stack Developer | Seeking Internship";
+const subtitleText = "CS Student | Full Stack Developer | Seeking Part-Time Work";
 let currentText = '';
 let currentIndex = 0;
 let isDeleting = false;

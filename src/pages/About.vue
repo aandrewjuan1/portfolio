@@ -201,6 +201,82 @@
           </div>
         </section>
 
+        <!-- Experience Section -->
+        <section class="space-y-8">
+          <h2 class="text-3xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">
+            Experience
+            <span class="absolute left-0 -bottom-2 w-16 h-1 bg-wine dark:bg-viridian rounded"></span>
+          </h2>
+          <div class="relative group">
+            <!-- Card Background with Gradient Border -->
+            <div class="absolute inset-0 bg-gradient-to-br from-wine/5 to-viridian/5 dark:from-wine/10 dark:to-viridian/10 rounded-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-wine/10 to-viridian/10 dark:from-wine/20 dark:to-viridian/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <!-- Card Content -->
+            <div class="relative p-8">
+              <!-- Timeline Container -->
+              <div class="space-y-8">
+                <!-- Tech Support (Internship) -->
+                <div class="relative">
+                  <!-- Timeline Line -->
+                  <div class="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-wine/20 via-viridian/20 to-transparent dark:from-wine/30 dark:via-viridian/30"></div>
+
+                  <!-- Content -->
+                  <div class="relative pl-16">
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-4 top-2 w-4 h-4 rounded-full border-2 border-wine dark:border-viridian bg-white dark:bg-rich-black-300"></div>
+
+                    <!-- Experience Info -->
+                    <div class="space-y-4">
+                      <div>
+                        <h3 class="text-2xl font-mono text-rich-black dark:text-mint-green-100">Tech Support (Internship)</h3>
+                        <div class="mt-2 space-y-2">
+                          <div class="flex items-center gap-3 text-rich-black-300 dark:text-mint-green-300">
+                            <i class="fas fa-building text-wine dark:text-viridian"></i>
+                            <span class="font-primary">De La Salle University — Dasmariñas</span>
+                          </div>
+                          <div class="flex items-center gap-3 text-rich-black-300 dark:text-mint-green-300">
+                            <i class="fas fa-calendar text-wine dark:text-viridian"></i>
+                            <span class="font-primary">June 2025 – August 2025</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Responsibilities -->
+                      <ul class="mt-4 space-y-2">
+                        <li class="flex items-start gap-3 text-rich-black-300 dark:text-mint-green-300 font-primary">
+                          <i class="fas fa-angle-right mt-1 text-wine dark:text-viridian"></i>
+                          <span>Provided technical support to students and faculty: troubleshooting hardware, software, and connectivity issues.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-rich-black-300 dark:text-mint-green-300 font-primary">
+                          <i class="fas fa-angle-right mt-1 text-wine dark:text-viridian"></i>
+                          <span>Responded to and managed support requests; documented steps-to-reproduce and resolutions.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-rich-black-300 dark:text-mint-green-300 font-primary">
+                          <i class="fas fa-angle-right mt-1 text-wine dark:text-viridian"></i>
+                          <span>Assisted with lab setup and software installation for instructional environments.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-rich-black-300 dark:text-mint-green-300 font-primary">
+                          <i class="fas fa-angle-right mt-1 text-wine dark:text-viridian"></i>
+                          <span>Maintained asset inventory and updated knowledge-base entries to improve troubleshooting efficiency.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-rich-black-300 dark:text-mint-green-300 font-primary">
+                          <i class="fas fa-angle-right mt-1 text-wine dark:text-viridian"></i>
+                          <span>Collaborated with the IT team to escalate and resolve recurring issues.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decorative Elements -->
+              <div class="absolute -top-6 -right-6 w-12 h-12 border-2 border-dashed border-wine/20 dark:border-viridian/20 rounded-full animate-spin-slow"></div>
+              <div class="absolute -bottom-6 -left-6 w-8 h-8 border-2 border-dotted border-viridian/20 dark:border-wine/20 rounded-full animate-spin-slow-reverse"></div>
+            </div>
+          </div>
+        </section>
+
         <!-- Technical Skills Section -->
         <section class="space-y-8">
           <h2 class="text-3xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">
