@@ -48,6 +48,26 @@
             darkMode: 'class'
         }
     </script>
+    <script>
+        // Apply theme immediately to prevent flash of light mode
+        (function() {
+            const theme = localStorage.getItem('theme') || 'system';
+            let isDark = false;
+
+            if (theme === 'dark') {
+                isDark = true;
+            } else if (theme === 'light') {
+                isDark = false;
+            } else {
+                // system theme
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="js/theme.js"></script>
@@ -83,18 +103,55 @@
                         <div class="md:hidden">
                             <button @click="toggleMobileMenu()" class="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300 focus:outline-none focus:ring-2 focus:ring-wine dark:focus:ring-mint-green" :aria-expanded="isMobileMenuOpen" aria-controls="mobile-menu" aria-label="Toggle mobile menu">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <template x-if="!isMobileMenuOpen"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></template>
-                                    <template x-if="isMobileMenuOpen"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></template>
+                                    <path x-show="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    <path x-show="isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
-                        <div class="flex items-center" x-data="{ showDropdown: false, theme: window.themeManager?.getStoredTheme() || 'system', isDark: document.documentElement.classList.contains('dark'), toggleDropdown() { this.showDropdown = !this.showDropdown; }, updateTheme(newTheme) { if (window.themeManager) { const result = window.themeManager.updateTheme(newTheme); this.theme = result.theme; this.isDark = result.isDark; } this.showDropdown = false; } }" @click.away="showDropdown = false">
+                        <div class="flex items-center" x-data="{
+                            showDropdown: false,
+                            theme: (() => {
+                                try {
+                                    return localStorage.getItem('theme') || 'system';
+                                } catch(e) {
+                                    return 'system';
+                                }
+                            })(),
+                            isDark: (() => {
+                                try {
+                                    const theme = localStorage.getItem('theme') || 'system';
+                                    if (theme === 'dark') return true;
+                                    if (theme === 'light') return false;
+                                    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+                                } catch(e) {
+                                    return false;
+                                }
+                            })(),
+                            toggleDropdown() { this.showDropdown = !this.showDropdown; },
+                            updateTheme(newTheme) {
+                                try {
+                                    localStorage.setItem('theme', newTheme);
+                                } catch(e) {}
+                                this.theme = newTheme;
+                                if (newTheme === 'dark') {
+                                    this.isDark = true;
+                                } else if (newTheme === 'light') {
+                                    this.isDark = false;
+                                } else {
+                                    this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                                }
+                                if (window.themeManager) {
+                                    window.themeManager.updateTheme(newTheme);
+                                }
+                                this.showDropdown = false;
+                            }
+                        }" @click.away="showDropdown = false">
                             <div class="relative inline-block theme-toggle">
                                 <button @click="toggleDropdown()" class="p-2 rounded-lg hover:bg-mint-green-300 dark:hover:bg-rich-black-300 transition-colors" :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
-                                    <svg x-show="isDark" class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                                    <svg x-show="!isDark" class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                                    <svg x-show="isDark" x-cloak class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                    <svg x-show="!isDark" x-cloak class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                                 </button>
-                                <div x-show="showDropdown" x-transition class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-mint-green dark:bg-rich-black z-50">
+                                <div x-show="showDropdown" x-transition x-cloak style="display: none;" class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-mint-green dark:bg-rich-black z-50">
                                     <div class="py-1" role="menu">
                                         <button @click="updateTheme('light')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'light' }" role="menuitem">Light</button>
                                         <button @click="updateTheme('dark')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'dark' }" role="menuitem">Dark</button>

@@ -1,0 +1,25 @@
+{
+  "name": "andrew_juan_portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aandrewjuan1/portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aandrewjuan1/portfolio/issues"
+  },
+  "homepage": "https://github.com/aandrewjuan1/portfolio#readme",
+  "devDependencies": {
+    "vite": "^5.4.21"
+  }
+}

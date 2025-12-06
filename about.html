@@ -48,6 +48,26 @@
             darkMode: 'class'
         }
     </script>
+    <script>
+        // Apply theme immediately to prevent flash of light mode
+        (function() {
+            const theme = localStorage.getItem('theme') || 'system';
+            let isDark = false;
+
+            if (theme === 'dark') {
+                isDark = true;
+            } else if (theme === 'light') {
+                isDark = false;
+            } else {
+                // system theme
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="js/theme.js"></script>
@@ -83,18 +103,55 @@
                         <div class="md:hidden">
                             <button @click="toggleMobileMenu()" class="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300 focus:outline-none focus:ring-2 focus:ring-wine dark:focus:ring-mint-green" :aria-expanded="isMobileMenuOpen" aria-controls="mobile-menu" aria-label="Toggle mobile menu">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <template x-if="!isMobileMenuOpen"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></template>
-                                    <template x-if="isMobileMenuOpen"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></template>
+                                    <path x-show="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    <path x-show="isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
-                        <div class="flex items-center" x-data="{ showDropdown: false, theme: window.themeManager?.getStoredTheme() || 'system', isDark: document.documentElement.classList.contains('dark'), toggleDropdown() { this.showDropdown = !this.showDropdown; }, updateTheme(newTheme) { if (window.themeManager) { const result = window.themeManager.updateTheme(newTheme); this.theme = result.theme; this.isDark = result.isDark; } this.showDropdown = false; } }" @click.away="showDropdown = false">
+                        <div class="flex items-center" x-data="{
+                            showDropdown: false,
+                            theme: (() => {
+                                try {
+                                    return localStorage.getItem('theme') || 'system';
+                                } catch(e) {
+                                    return 'system';
+                                }
+                            })(),
+                            isDark: (() => {
+                                try {
+                                    const theme = localStorage.getItem('theme') || 'system';
+                                    if (theme === 'dark') return true;
+                                    if (theme === 'light') return false;
+                                    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+                                } catch(e) {
+                                    return false;
+                                }
+                            })(),
+                            toggleDropdown() { this.showDropdown = !this.showDropdown; },
+                            updateTheme(newTheme) {
+                                try {
+                                    localStorage.setItem('theme', newTheme);
+                                } catch(e) {}
+                                this.theme = newTheme;
+                                if (newTheme === 'dark') {
+                                    this.isDark = true;
+                                } else if (newTheme === 'light') {
+                                    this.isDark = false;
+                                } else {
+                                    this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                                }
+                                if (window.themeManager) {
+                                    window.themeManager.updateTheme(newTheme);
+                                }
+                                this.showDropdown = false;
+                            }
+                        }" @click.away="showDropdown = false">
                             <div class="relative inline-block theme-toggle">
                                 <button @click="toggleDropdown()" class="p-2 rounded-lg hover:bg-mint-green-300 dark:hover:bg-rich-black-300 transition-colors" :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
-                                    <svg x-show="isDark" class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                                    <svg x-show="!isDark" class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                                    <svg x-show="isDark" x-cloak class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                    <svg x-show="!isDark" x-cloak class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                                 </button>
-                                <div x-show="showDropdown" x-transition class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-mint-green dark:bg-rich-black z-50">
+                                <div x-show="showDropdown" x-transition x-cloak style="display: none;" class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-mint-green dark:bg-rich-black z-50">
                                     <div class="py-1" role="menu">
                                         <button @click="updateTheme('light')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'light' }" role="menuitem">Light</button>
                                         <button @click="updateTheme('dark')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'dark' }" role="menuitem">Dark</button>
@@ -137,7 +194,7 @@
                                         <div class="space-y-8">
                                             <div class="space-y-6">
                                                 <h2 class="text-3xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">Andrew Juan<span class="absolute left-0 -bottom-2 w-16 h-1 bg-wine dark:bg-viridian rounded"></span></h2>
-                                                <p class="text-lg leading-relaxed text-rich-black-300 dark:text-mint-green-300 font-primary">I am a Computer Science undergraduate at Emilio Aguinaldo College – Cavite, expected to graduate in 2026. My passion lies in building responsive, interactive web applications that provide exceptional user experiences. I specialize in both frontend and backend development, with a strong focus on clean code and user-focused design.</p>
+                                                <p class="text-lg leading-relaxed text-rich-black-300 dark:text-mint-green-300 font-primary">I am a Computer Science graduate from Emilio Aguinaldo College – Cavite. My passion lies in building responsive, interactive web applications that provide exceptional user experiences. I specialize in both frontend and backend development, with a strong focus on clean code and user-focused design. I am currently seeking entry-level or junior developer positions where I can contribute to meaningful projects and continue growing my skills in a professional environment.</p>
                                             </div>
                                         </div>
                                         <div class="relative">
@@ -175,7 +232,7 @@
                                                                 <h3 class="text-2xl font-mono text-rich-black dark:text-mint-green-100">Bachelor of Science in Computer Science</h3>
                                                                 <div class="mt-2 space-y-2">
                                                                     <div class="flex items-center gap-3 text-rich-black-300 dark:text-mint-green-300"><i class="fas fa-university text-wine dark:text-viridian"></i><span class="font-primary">Emilio Aguinaldo College – Cavite</span></div>
-                                                                    <div class="flex items-center gap-3 text-rich-black-300 dark:text-mint-green-300"><i class="fas fa-calendar text-wine dark:text-viridian"></i><span class="font-primary">2022 - Present (Expected Graduation: 2026)</span></div>
+                                                                    <div class="flex items-center gap-3 text-rich-black-300 dark:text-mint-green-300"><i class="fas fa-calendar text-wine dark:text-viridian"></i><span class="font-primary">2022 - 2026</span></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -265,7 +322,6 @@
                                                 <div class="grid grid-cols-2 gap-4">
                                                     <a href="https://www.php.net/docs.php" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">PHP</span></a>
                                                     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">JavaScript</span></a>
-                                                    <a href="https://www.typescriptlang.org/docs/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">TypeScript</span></a>
                                                     <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML/CSS" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">HTML/CSS</span></a>
                                                     <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">SQL</span></a>
                                                     <a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">Python</span></a>
@@ -280,7 +336,6 @@
                                                 <div class="relative"><h4 class="text-xl font-mono text-rich-black dark:text-mint-green-100 relative z-10">Frameworks & Libraries</h4><div class="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-8 bg-wine/20 dark:bg-viridian/20 rounded-full transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div></div>
                                                 <div class="grid grid-cols-2 gap-4">
                                                     <a href="https://laravel.com/docs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">Laravel</span></a>
-                                                    <a href="https://vuejs.org/guide/introduction.html" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">Vue.js</span></a>
                                                     <a href="https://api.jquery.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" alt="jQuery" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">jQuery</span></a>
                                                     <a href="https://tailwindcss.com/docs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">Tailwind</span></a>
                                                     <a href="https://alpinejs.dev/start-here" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/alpinejs/alpinejs-original.svg" alt="Alpine.js" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">Alpine.js</span></a>
@@ -298,6 +353,8 @@
                                                     <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">MySQL</span></a>
                                                     <a href="https://www.sqlite.org/docs.html" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQLite" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">SQLite</span></a>
                                                     <a href="https://learning.postman.com/docs/getting-started/introduction/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">Postman</span></a>
+                                                    <a href="https://ollama.ai" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/ollama.svg" alt="Ollama" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">Ollama</span></a>
+                                                    <a href="https://cursor.sh" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill"><img src="https://img.icons8.com/?size=100&id=4gUIAQbx9oh5&format=png&color=000000" alt="Cursor IDE" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110"><span class="text-sm font-primary text-rich-black dark:text-mint-green-100">Cursor IDE</span></a>
                                                 </div>
                                             </div>
                                         </div>

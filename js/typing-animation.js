@@ -6,7 +6,7 @@
     const typingElement = document.querySelector('.typing-subtitle');
     if (!typingElement) return;
 
-    const subtitleText = "CS Student | Full Stack Developer | Seeking Part-Time Work";
+    const subtitleText = "CS Graduate | Full Stack Developer | Open to Opportunities";
     let currentText = '';
     let currentIndex = 0;
     let isDeleting = false;
@@ -46,4 +46,3 @@
     initTypingAnimation();
   }
 })();
-
