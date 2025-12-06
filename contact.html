@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Andrew Juan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wine': {
+                            100: '#b98291',
+                            300: '#995266',
+                            DEFAULT: '#6D2E46',
+                            700: '#541d33',
+                            900: '#3b1323'
+                        },
+                        'mint-green': {
+                            100: '#f0f7f5',
+                            300: '#dcebe6',
+                            DEFAULT: '#D1E3DD',
+                            700: '#a5b8b3',
+                            900: '#7f918d'
+                        },
+                        'rich-black': {
+                            100: '#3e4a51',
+                            300: '#233239',
+                            DEFAULT: '#011C27',
+                            700: '#000d12',
+                            900: '#000406'
+                        },
+                        'viridian': {
+                            100: '#b3ccc5',
+                            300: '#7ca89c',
+                            DEFAULT: '#4C8577',
+                            700: '#326157',
+                            900: '#1d3e37'
+                        }
+                    },
+                    fontFamily: {
+                        'primary': ['Cousine', 'sans-serif'],
+                        'mono': ['Syne Mono', 'monospace']
+                    }
+                }
+            },
+            darkMode: 'class'
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="js/theme.js"></script>
+    <script src="js/scroll-progress.js"></script>
+</head>
+<body>
+    <div class="relative min-h-screen font-primary bg-mint-green/95 dark:bg-rich-black/95 text-rich-black dark:text-mint-green transition-colors duration-200">
+        <div id="scroll-progress" class="fixed top-0 left-0 h-1 z-50 transition-all duration-300" aria-hidden="true">
+            <div class="h-full w-full bg-gradient-to-r from-wine via-viridian to-mint-green dark:from-mint-green dark:via-viridian dark:to-wine opacity-95"></div>
+        </div>
+        <div class="fixed inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -inset-[10px] opacity-20">
+                <div class="absolute top-0 -left-4 w-72 h-72 bg-[var(--color-wine)] rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+                <div class="absolute top-0 -right-4 w-72 h-72 bg-[var(--color-viridian)] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+                <div class="absolute -bottom-8 left-20 w-72 h-72 bg-[var(--color-mint-green)] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+            </div>
+        </div>
+        <div class="relative min-h-screen flex flex-col">
+            <!-- Navbar (same structure as index.html) -->
+            <nav x-data='{ isMobileMenuOpen: false, isScrolled: false, currentPath: window.location.pathname, navItems: [{ name: "Home", path: "index.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z\" /></svg>" }, { name: "About", path: "about.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z\" clip-rule=\"evenodd\" /></svg>" }, { name: "Projects", path: "projects.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z\" /></svg>" }, { name: "Contact", path: "contact.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z\" /><path d=\"M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z\" /></svg>" }], toggleMobileMenu() { this.isMobileMenuOpen = !this.isMobileMenuOpen; document.body.style.overflow = this.isMobileMenuOpen ? "hidden" : ""; }, closeMobileMenu() { this.isMobileMenuOpen = false; document.body.style.overflow = ""; }, isActive(path) { const current = window.location.pathname.split("/").pop() || "index.html"; return current === path || (current === "" && path === "index.html"); } }' @scroll.window="isScrolled = window.scrollY > 20" @keydown.escape.window="if (isMobileMenuOpen) closeMobileMenu()" class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto fixed left-1/2 -translate-x-1/2 top-2 z-40 transition-all duration-300 rounded-lg focus-visible:outline-none" :class="{ 'nav-background shadow-lg': isScrolled }" role="navigation" aria-label="Main navigation">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-16">
+                        <div class="hidden md:flex items-center space-x-8">
+                            <template x-for="item in navItems" :key="item.path">
+                                <a :href="item.path" class="group relative px-3 py-2 transition-all duration-200 focus:outline-none font-mono" :class="isActive(item.path) ? 'font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]' : 'text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-b-2 hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'" :aria-current="isActive(item.path) ? 'page' : undefined">
+                                    <div class="flex items-center space-x-2">
+                                        <span x-html="item.icon" class="transition-transform group-hover:scale-110" aria-hidden="true"></span>
+                                        <span x-text="item.name"></span>
+                                    </div>
+                                </a>
+                            </template>
+                        </div>
+                        <div class="md:hidden">
+                            <button @click="toggleMobileMenu()" class="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300 focus:outline-none focus:ring-2 focus:ring-wine dark:focus:ring-mint-green" :aria-expanded="isMobileMenuOpen" aria-controls="mobile-menu" aria-label="Toggle mobile menu">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <template x-if="!isMobileMenuOpen"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></template>
+                                    <template x-if="isMobileMenuOpen"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></template>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex items-center" x-data="{ showDropdown: false, theme: window.themeManager?.getStoredTheme() || 'system', isDark: document.documentElement.classList.contains('dark'), toggleDropdown() { this.showDropdown = !this.showDropdown; }, updateTheme(newTheme) { if (window.themeManager) { const result = window.themeManager.updateTheme(newTheme); this.theme = result.theme; this.isDark = result.isDark; } this.showDropdown = false; } }" @click.away="showDropdown = false">
+                            <div class="relative inline-block theme-toggle">
+                                <button @click="toggleDropdown()" class="p-2 rounded-lg hover:bg-mint-green-300 dark:hover:bg-rich-black-300 transition-colors" :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+                                    <svg x-show="isDark" class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                    <svg x-show="!isDark" class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                                </button>
+                                <div x-show="showDropdown" x-transition class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-mint-green dark:bg-rich-black z-50">
+                                    <div class="py-1" role="menu">
+                                        <button @click="updateTheme('light')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'light' }" role="menuitem">Light</button>
+                                        <button @click="updateTheme('dark')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'dark' }" role="menuitem">Dark</button>
+                                        <button @click="updateTheme('system')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'system' }" role="menuitem">System</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-show="isMobileMenuOpen" x-transition id="mobile-menu" class="md:hidden py-4" role="menu" aria-orientation="vertical">
+                        <template x-for="item in navItems" :key="item.path">
+                            <a :href="item.path" @click="closeMobileMenu()" class="group flex items-center space-x-2 px-4 py-2 transition-all duration-200 focus:outline-none font-mono" :class="isActive(item.path) ? 'font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]' : 'text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'" role="menuitem" :aria-current="isActive(item.path) ? 'page' : undefined">
+                                <span x-html="item.icon" class="transition-transform group-hover:scale-110" aria-hidden="true"></span>
+                                <span x-text="item.name"></span>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </nav>
+            <div class="flex-1 flex flex-col">
+                <main class="flex-1">
+                    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+                        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 py-36 sm:px-6 lg:px-8">
+                            <div class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto">
+                                <div class="text-center space-y-4 mb-16 relative">
+                                    <h1 class="text-5xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">Contact Me</h1>
+                                    <p class="text-lg text-rich-black-300 dark:text-mint-green-300 max-w-2xl mx-auto">Feel free to reach out to me at <a href="mailto:aandrewjuan2@gmail.com" class="text-wine dark:text-viridian hover:underline">aandrewjuan2@gmail.com</a></p>
+                                </div>
+                                <div class="max-w-2xl mx-auto">
+                                    <div class="bg-mint-green-100 dark:bg-rich-black-300 p-8 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-[1.02]">
+                                        <form x-data="{ form: { name: '', email: '', message: '' }, isSubmitting: false, async handleSubmit() { this.isSubmitting = true; try { console.log('Form submitted:', this.form); this.form = { name: '', email: '', message: '' }; alert('Message sent successfully!'); } catch (error) { console.error('Error submitting form:', error); alert('Failed to send message. Please try again.'); } finally { this.isSubmitting = false; } } }" @submit.prevent="handleSubmit()" class="space-y-6">
+                                            <div>
+                                                <label for="name" class="block text-sm font-mono text-rich-black dark:text-mint-green-100">Name</label>
+                                                <input type="text" id="name" x-model="form.name" class="mt-1 block w-full rounded-lg border-wine/20 dark:border-viridian/20 bg-white dark:bg-rich-black-200 text-rich-black dark:text-mint-green-100 shadow-sm focus:border-wine dark:focus:border-viridian focus:ring-wine/20 dark:focus:ring-viridian/20 transition-colors duration-200" required>
+                                            </div>
+                                            <div>
+                                                <label for="email" class="block text-sm font-mono text-rich-black dark:text-mint-green-100">Email</label>
+                                                <input type="email" id="email" x-model="form.email" class="mt-1 block w-full rounded-lg border-wine/20 dark:border-viridian/20 bg-white dark:bg-rich-black-200 text-rich-black dark:text-mint-green-100 shadow-sm focus:border-wine dark:focus:border-viridian focus:ring-wine/20 dark:focus:ring-viridian/20 transition-colors duration-200" required>
+                                            </div>
+                                            <div>
+                                                <label for="message" class="block text-sm font-mono text-rich-black dark:text-mint-green-100">Message</label>
+                                                <textarea id="message" x-model="form.message" rows="4" class="mt-1 block w-full rounded-lg border-wine/20 dark:border-viridian/20 bg-white dark:bg-rich-black-200 text-rich-black dark:text-mint-green-100 shadow-sm focus:border-wine dark:focus:border-viridian focus:ring-wine/20 dark:focus:ring-viridian/20 transition-colors duration-200" required></textarea>
+                                            </div>
+                                            <button type="submit" :disabled="isSubmitting" class="w-full px-8 py-3 bg-wine dark:bg-viridian text-mint-green-100 dark:text-rich-black rounded-full font-mono font-medium transition-all duration-300 hover:-translate-y-1 hover:bg-wine-700 dark:hover:bg-viridian-700 hover:shadow-lg group relative overflow-hidden">
+                                                <span class="relative z-10" x-text="isSubmitting ? 'Sending...' : 'Send Message'"></span>
+                                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="mt-12 text-center">
+                                        <h3 class="text-2xl font-mono text-rich-black dark:text-mint-green-100 mb-6">Connect with Me</h3>
+                                        <div class="flex justify-center gap-6">
+                                            <a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
+                                                <div class="w-12 h-12 rounded-full bg-wine/10 dark:bg-viridian/10 flex items-center justify-center group-hover:bg-wine/20 dark:group-hover:bg-viridian/20 transition-colors duration-300">
+                                                    <i class="fab fa-github text-xl"></i>
+                                                </div>
+                                                <span class="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">GitHub</span>
+                                            </a>
+                                            <a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
+                                                <div class="w-12 h-12 rounded-full bg-wine/10 dark:bg-viridian/10 flex items-center justify-center group-hover:bg-wine/20 dark:group-hover:bg-viridian/20 transition-colors duration-300">
+                                                    <i class="fab fa-linkedin text-xl"></i>
+                                                </div>
+                                                <span class="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">LinkedIn</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <!-- Footer (same as index.html) -->
+            <footer class="w-full bg-mint-green/95 dark:bg-rich-black/95 border-t border-rich-black/10 dark:border-mint-green/10 relative z-10">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rich-black/20 dark:via-mint-green/20 to-transparent"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="space-y-4"><h3 class="text-xl font-bold">Andrew Juan</h3><p class="text-sm text-rich-black/70 dark:text-mint-green/70">A showcase of my work and skills in web development and design.</p></div>
+                        <div class="space-y-4"><h3 class="text-xl font-bold">Quick Links</h3><nav class="flex flex-col space-y-2"><a href="index.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Home</a><a href="about.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">About</a><a href="projects.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Projects</a><a href="contact.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Contact</a></nav></div>
+                        <div class="space-y-4"><h3 class="text-xl font-bold">Contact Info</h3><div class="space-y-2"><a href="mailto:aandrewjuan2@gmail.com" class="flex items-center space-x-2 text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors"><i class="fas fa-envelope"></i><span>aandrewjuan2@gmail.com</span></a><div class="flex space-x-4 pt-2"><a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors"><i class="fab fa-github text-xl"></i></a><a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors"><i class="fab fa-linkedin text-xl"></i></a></div></div></div>
+                    </div>
+                </div>
+                <div class="border-t border-rich-black/10 dark:border-mint-green/10">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                        <div class="flex justify-center"><p class="text-sm text-rich-black/70 dark:text-mint-green/70">© <span id="current-year-contact"></span> Andrew Juan. All rights reserved.</p></div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <style>
+        @keyframes blob { 0% { transform: translate(0px, 0px) scale(1); } 33% { transform: translate(30px, -50px) scale(1.1); } 66% { transform: translate(-20px, 20px) scale(0.9); } 100% { transform: translate(0px, 0px) scale(1); } }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        .nav-background { transition: all 0.3s; background: rgba(255, 255, 255, 0.8); background: rgba(255, 255, 255, 0.03); -webkit-backdrop-filter: blur(16px); -moz-backdrop-filter: blur(16px); -ms-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+        @supports (-moz-appearance:none) { .nav-background { background: rgba(255, 255, 255, 0.8); } }
+        .dark .nav-background { background: rgba(0, 0, 0, 0.8); background: rgba(0, 0, 0, 0.03); -webkit-backdrop-filter: blur(16px); -moz-backdrop-filter: blur(16px); -ms-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+        @supports (-moz-appearance:none) { .dark .nav-background { background: rgba(0, 0, 0, 0.8); } }
+    </style>
+    <script>document.getElementById('current-year-contact').textContent = new Date().getFullYear();</script>
+    <script src="https://unpkg.com/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script>
+        if (typeof Alpine === 'undefined') {
+            console.error('Alpine.js failed to load');
+        }
+    </script>
+</body>
+</html>

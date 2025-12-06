@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Syne+Mono&display=swap');
-@import "tailwindcss";
 
-/* Dark mode variant configuration */
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
+/* Custom CSS Variables for Theme */
+:root {
     --font-primary: 'Cousine', sans-serif;
     --font-mono: 'Syne Mono', monospace;
 

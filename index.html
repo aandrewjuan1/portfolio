@@ -1,28 +1,727 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./src/style.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrew Juan - Portfolio</title>
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) {
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
-          );
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wine': {
+                            100: '#b98291',
+                            300: '#995266',
+                            DEFAULT: '#6D2E46',
+                            700: '#541d33',
+                            900: '#3b1323'
+                        },
+                        'mint-green': {
+                            100: '#f0f7f5',
+                            300: '#dcebe6',
+                            DEFAULT: '#D1E3DD',
+                            700: '#a5b8b3',
+                            900: '#7f918d'
+                        },
+                        'rich-black': {
+                            100: '#3e4a51',
+                            300: '#233239',
+                            DEFAULT: '#011C27',
+                            700: '#000d12',
+                            900: '#000406'
+                        },
+                        'viridian': {
+                            100: '#b3ccc5',
+                            300: '#7ca89c',
+                            DEFAULT: '#4C8577',
+                            700: '#326157',
+                            900: '#1d3e37'
+                        }
+                    },
+                    fontFamily: {
+                        'primary': ['Cousine', 'sans-serif'],
+                        'mono': ['Syne Mono', 'monospace']
+                    }
+                }
+            },
+            darkMode: 'class'
         }
-      }(window.location))
     </script>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="./src/main.ts"></script>
-  </body>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="js/theme.js"></script>
+    <script src="js/scroll-progress.js"></script>
+    <script src="js/typing-animation.js"></script>
+</head>
+<body>
+    <div class="relative min-h-screen font-primary bg-mint-green/95 dark:bg-rich-black/95 text-rich-black dark:text-mint-green transition-colors duration-200">
+        <!-- Scroll Progress Bar -->
+        <div id="scroll-progress" class="fixed top-0 left-0 h-1 z-50 transition-all duration-300" aria-hidden="true">
+            <div class="h-full w-full bg-gradient-to-r from-wine via-viridian to-mint-green dark:from-mint-green dark:via-viridian dark:to-wine opacity-95"></div>
+        </div>
+
+        <!-- Background elements -->
+        <div class="fixed inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -inset-[10px] opacity-20">
+                <div class="absolute top-0 -left-4 w-72 h-72 bg-[var(--color-wine)] rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+                <div class="absolute top-0 -right-4 w-72 h-72 bg-[var(--color-viridian)] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+                <div class="absolute -bottom-8 left-20 w-72 h-72 bg-[var(--color-mint-green)] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+            </div>
+        </div>
+
+        <!-- Main content wrapper -->
+        <div class="relative min-h-screen flex flex-col">
+            <!-- Navbar -->
+            <nav
+                x-data='{
+                    isMobileMenuOpen: false,
+                    isScrolled: false,
+                    currentPath: window.location.pathname,
+                    navItems: [
+                        { name: "Home", path: "index.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z\" /></svg>" },
+                        { name: "About", path: "about.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z\" clip-rule=\"evenodd\" /></svg>" },
+                        { name: "Projects", path: "projects.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z\" /></svg>" },
+                        { name: "Contact", path: "contact.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z\" /><path d=\"M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z\" /></svg>" }
+                    ],
+                    toggleMobileMenu() {
+                        this.isMobileMenuOpen = !this.isMobileMenuOpen;
+                        document.body.style.overflow = this.isMobileMenuOpen ? "hidden" : "";
+                    },
+                    closeMobileMenu() {
+                        this.isMobileMenuOpen = false;
+                        document.body.style.overflow = "";
+                    },
+                    isActive(path) {
+                        const current = window.location.pathname.split("/").pop() || "index.html";
+                        return current === path || (current === "" && path === "index.html");
+                    }
+                }'
+                @scroll.window="isScrolled = window.scrollY > 20"
+                @keydown.escape.window="if (isMobileMenuOpen) closeMobileMenu()"
+                class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto fixed left-1/2 -translate-x-1/2 top-2 z-40 transition-all duration-300 rounded-lg focus-visible:outline-none"
+                :class="{ 'nav-background shadow-lg': isScrolled }"
+                role="navigation"
+                aria-label="Main navigation"
+            >
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-16">
+                        <!-- Navigation Links -->
+                        <div class="hidden md:flex items-center space-x-8">
+                            <template x-for="item in navItems" :key="item.path">
+                                <a
+                                    :href="item.path"
+                                    class="group relative px-3 py-2 transition-all duration-200 focus:outline-none font-mono"
+                                    :class="isActive(item.path)
+                                        ? 'font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]'
+                                        : 'text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-b-2 hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'"
+                                    :aria-current="isActive(item.path) ? 'page' : undefined"
+                                >
+                                    <div class="flex items-center space-x-2">
+                                        <span x-html="item.icon" class="transition-transform group-hover:scale-110" aria-hidden="true"></span>
+                                        <span x-text="item.name"></span>
+                                    </div>
+                                </a>
+                            </template>
+                        </div>
+
+                        <!-- Mobile Menu Button -->
+                        <div class="md:hidden">
+                            <button
+                                @click="toggleMobileMenu()"
+                                class="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300 focus:outline-none focus:ring-2 focus:ring-wine dark:focus:ring-mint-green"
+                                :aria-expanded="isMobileMenuOpen"
+                                aria-controls="mobile-menu"
+                                aria-label="Toggle mobile menu"
+                            >
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <template x-if="!isMobileMenuOpen">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    </template>
+                                    <template x-if="isMobileMenuOpen">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </template>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Theme Toggle -->
+                        <div class="flex items-center" x-data="{
+                            showDropdown: false,
+                            theme: window.themeManager?.getStoredTheme() || 'system',
+                            isDark: document.documentElement.classList.contains('dark'),
+                            toggleDropdown() { this.showDropdown = !this.showDropdown; },
+                            updateTheme(newTheme) {
+                                if (window.themeManager) {
+                                    const result = window.themeManager.updateTheme(newTheme);
+                                    this.theme = result.theme;
+                                    this.isDark = result.isDark;
+                                }
+                                this.showDropdown = false;
+                            }
+                        }" @click.away="showDropdown = false">
+                            <div class="relative inline-block theme-toggle">
+                                <button
+                                    @click="toggleDropdown()"
+                                    class="p-2 rounded-lg hover:bg-mint-green-300 dark:hover:bg-rich-black-300 transition-colors"
+                                    :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+                                >
+                                    <!-- Sun icon -->
+                                    <svg x-show="isDark" class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                    <!-- Moon icon -->
+                                    <svg x-show="!isDark" class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                    </svg>
+                                </button>
+
+                                <!-- Theme dropdown -->
+                                <div x-show="showDropdown" x-transition class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-mint-green dark:bg-rich-black z-50">
+                                    <div class="py-1" role="menu">
+                                        <button @click="updateTheme('light')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'light' }" role="menuitem">Light</button>
+                                        <button @click="updateTheme('dark')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'dark' }" role="menuitem">Dark</button>
+                                        <button @click="updateTheme('system')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'system' }" role="menuitem">System</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div x-show="isMobileMenuOpen" x-transition id="mobile-menu" class="md:hidden py-4" role="menu" aria-orientation="vertical">
+                        <template x-for="item in navItems" :key="item.path">
+                            <a
+                                :href="item.path"
+                                @click="closeMobileMenu()"
+                                class="group flex items-center space-x-2 px-4 py-2 transition-all duration-200 focus:outline-none font-mono"
+                                :class="isActive(item.path)
+                                    ? 'font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]'
+                                    : 'text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'"
+                                role="menuitem"
+                                :aria-current="isActive(item.path) ? 'page' : undefined"
+                            >
+                                <span x-html="item.icon" class="transition-transform group-hover:scale-110" aria-hidden="true"></span>
+                                <span x-text="item.name"></span>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="flex-1 flex flex-col">
+                <main class="flex-1">
+                    <div class="min-h-screen flex flex-col">
+                        <!-- Hero Section -->
+                        <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+                            <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto">
+                                    <div class="max-w-3xl mx-auto text-center">
+                                        <!-- Greeting with fade-in animation -->
+                                        <div class="mb-4 text-lg sm:text-xl text-[var(--color-rich-black)] dark:text-[var(--color-mint-green-300)] font-mono animate-fade-in">
+                                            <span class="typing-text">Hello, I'm</span>
+                                        </div>
+
+                                        <!-- Name with slide-up animation -->
+                                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-mono mb-6 text-[var(--color-wine)] dark:text-[var(--color-mint-green)] animate-slide-up">
+                                            Andrew Juan
+                                        </h1>
+
+                                        <!-- Subtitle with typing animation -->
+                                        <div class="h-20 sm:h-24">
+                                            <p class="text-xl sm:text-2xl text-[var(--color-rich-black)] dark:text-[var(--color-viridian-300)] font-light">
+                                                <span class="typing-subtitle"></span>
+                                                <span class="typing-cursor">|</span>
+                                            </p>
+                                        </div>
+
+                                        <!-- CTA Buttons -->
+                                        <div class="mb-12 flex justify-center gap-6 animate-fade-in animation-delay-500">
+                                            <a href="#projects" class="px-8 py-3 rounded-lg font-mono text-base font-medium transition-all duration-300 bg-[var(--color-wine)] text-white dark:bg-[var(--color-mint-green)] dark:text-[var(--color-rich-black)] hover:bg-[var(--color-wine-700)] dark:hover:bg-[var(--color-mint-green-300)] transform hover:scale-[1.02] hover:shadow-md border-2 border-transparent hover:border-[var(--color-wine-400)] dark:hover:border-[var(--color-mint-green-300)]">
+                                                View Projects
+                                            </a>
+                                            <a href="#contact" class="px-8 py-3 rounded-lg font-mono text-base font-medium transition-all duration-300 bg-transparent text-[var(--color-wine)] dark:text-[var(--color-mint-green)] border-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)] hover:bg-[var(--color-wine-50)] dark:hover:bg-[var(--color-mint-green-50)] hover:text-[var(--color-wine-700)] dark:hover:text-[var(--color-mint-green-700)] transform hover:scale-[1.02] hover:shadow-md">
+                                                Contact Me
+                                            </a>
+                                        </div>
+
+                                        <!-- Divider line -->
+                                        <div class="w-24 h-0.5 bg-[var(--color-wine)] dark:bg-[var(--color-mint-green)] mx-auto mb-8 animate-fade-in animation-delay-400"></div>
+
+                                        <!-- Social Links -->
+                                        <div class="font-mono flex justify-center gap-8 animate-fade-in animation-delay-700">
+                                            <a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-[var(--color-rich-black)] dark:text-[var(--color-viridian-300)] hover:text-[var(--color-wine)] dark:hover:text-[var(--color-mint-green)] transition-all duration-300">
+                                                <i class="fab fa-github text-3xl mb-2"></i>
+                                                <span class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">GitHub</span>
+                                            </a>
+                                            <a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-[var(--color-rich-black)] dark:text-[var(--color-viridian-300)] hover:text-[var(--color-wine)] dark:hover:text-[var(--color-mint-green)] transition-all duration-300">
+                                                <i class="fab fa-linkedin text-3xl mb-2"></i>
+                                                <span class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">LinkedIn</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- About Section -->
+                        <section class="relative z-10 overflow-hidden" id="about">
+                            <!-- Full Width Background -->
+                            <div class="absolute inset-0 w-[100vw] overflow-hidden pointer-events-none">
+                                <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]">
+                                    <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
+                                </div>
+                                <div class="absolute top-1/4 left-10 w-2 h-2 bg-wine/20 dark:bg-viridian/20 rounded-full animate-float"></div>
+                                <div class="absolute bottom-1/3 right-20 w-1.5 h-1.5 bg-viridian/20 dark:bg-wine/20 rounded-full animate-float-delayed"></div>
+                                <div class="absolute top-2/3 left-1/4 w-1 h-1 bg-wine/20 dark:bg-viridian/20 rounded-full animate-float"></div>
+                                <div class="absolute top-1/2 left-0 w-16 h-px bg-gradient-to-r from-transparent via-wine/20 dark:via-viridian/20 to-transparent"></div>
+                                <div class="absolute top-1/2 right-0 w-16 h-px bg-gradient-to-l from-transparent via-wine/20 dark:via-viridian/20 to-transparent"></div>
+                            </div>
+
+                            <!-- Content Container -->
+                            <div class="relative py-24">
+                                <div class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto space-y-16">
+                                    <!-- About Me and Image Section -->
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative">
+                                        <!-- Text Content -->
+                                        <div class="space-y-8">
+                                            <div class="space-y-6">
+                                                <h2 class="text-4xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">
+                                                    About Me
+                                                    <span class="absolute left-0 -bottom-3 w-16 h-1 bg-wine dark:bg-viridian rounded transform transition-all duration-300 group-hover:w-24"></span>
+                                                </h2>
+                                                <p class="text-lg leading-relaxed text-rich-black-300 dark:text-mint-green-300 font-primary max-w-2xl">
+                                                    Motivated Computer Science undergraduate with hands-on experience building responsive, interactive web applications. Seeking a part-time web developer position where I can contribute to both frontend and backend development. Passionate about clean code, user-focused design, and learning modern web technologies in real-world environments.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Creative Image Container -->
+                                        <div class="relative">
+                                            <div class="absolute -top-8 -right-8 w-16 h-16 border-2 border-dashed border-wine/20 dark:border-viridian/20 rounded-full animate-spin-slow"></div>
+                                            <div class="absolute -bottom-8 -left-8 w-12 h-12 border-2 border-dotted border-viridian/20 dark:border-wine/20 rounded-full animate-spin-slow-reverse"></div>
+                                            <div class="relative w-full max-w-[300px] mx-auto">
+                                                <div class="absolute -top-6 -left-6 w-24 h-24 border-4 border-viridian dark:border-wine rounded-lg transform -rotate-12 transition-transform duration-500 hover:rotate-0"></div>
+                                                <div class="absolute -bottom-6 -right-6 w-24 h-24 border-4 border-wine dark:border-viridian rounded-lg transform rotate-12 transition-transform duration-500 hover:rotate-0"></div>
+                                                <div class="relative overflow-hidden rounded-xl group">
+                                                    <div class="absolute inset-0 bg-gradient-to-br from-viridian/20 via-transparent to-wine/20 dark:from-wine/20 dark:to-viridian/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                                    <img src="images/about/profileImage.png" alt="Profile Image" class="w-full aspect-square object-cover transform transition-all duration-700 group-hover:scale-105">
+                                                </div>
+                                                <div class="absolute -z-10 inset-0">
+                                                    <div class="absolute top-1/2 -left-8 w-16 h-16 bg-viridian/10 dark:bg-wine/10 rounded-full blur-xl animate-float"></div>
+                                                    <div class="absolute bottom-1/4 -right-8 w-20 h-20 bg-wine/10 dark:bg-viridian/10 rounded-full blur-xl animate-float-delayed"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="about.html" class="inline-flex items-center gap-2 px-6 py-3 bg-wine dark:bg-viridian text-mint-green-100 rounded-full font-mono font-medium transition-all duration-300 hover:-translate-y-1 hover:bg-wine-700 dark:hover:bg-viridian-700 hover:shadow-lg group relative overflow-hidden">
+                                        <span class="relative z-10">Learn More About Me</span>
+                                        <span class="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                                    </a>
+
+                                    <!-- Skills Section -->
+                                    <div class="space-y-8 relative">
+                                        <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-wine/30 dark:via-viridian/30 to-transparent"></div>
+                                        <div class="flex flex-col items-center space-y-6">
+                                            <div class="space-y-2 text-center">
+                                                <h3 class="text-2xl font-mono text-rich-black dark:text-mint-green-100">My Skills</h3>
+                                                <div class="w-16 h-1 bg-wine/60 dark:bg-viridian/60 rounded-full mx-auto"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Skills Categories -->
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                                            <!-- Languages -->
+                                            <div class="space-y-6 group">
+                                                <div class="relative">
+                                                    <h4 class="text-lg font-mono text-rich-black-300 dark:text-mint-green-300 relative z-10">Languages</h4>
+                                                    <div class="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-8 bg-wine/20 dark:bg-viridian/20 rounded-full transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
+                                                </div>
+                                                <div class="grid grid-cols-2 gap-6">
+                                                    <a href="https://www.php.net/docs.php" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">PHP</span>
+                                                    </a>
+                                                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">JavaScript</span>
+                                                    </a>
+                                                    <a href="https://www.typescriptlang.org/docs/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">TypeScript</span>
+                                                    </a>
+                                                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML/CSS" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">HTML/CSS</span>
+                                                    </a>
+                                                    <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">SQL</span>
+                                                    </a>
+                                                    <a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">Python</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Frameworks -->
+                                            <div class="space-y-6 group">
+                                                <div class="relative">
+                                                    <h4 class="text-lg font-mono text-rich-black-300 dark:text-mint-green-300 relative z-10">Frameworks & Libraries</h4>
+                                                    <div class="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-8 bg-wine/20 dark:bg-viridian/20 rounded-full transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
+                                                </div>
+                                                <div class="grid grid-cols-2 gap-6">
+                                                    <a href="https://laravel.com/docs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">Laravel</span>
+                                                    </a>
+                                                    <a href="https://vuejs.org/guide/introduction.html" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">Vue.js</span>
+                                                    </a>
+                                                    <a href="https://api.jquery.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" alt="jQuery" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">jQuery</span>
+                                                    </a>
+                                                    <a href="https://tailwindcss.com/docs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">Tailwind</span>
+                                                    </a>
+                                                    <a href="https://alpinejs.dev/start-here" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/alpinejs/alpinejs-original.svg" alt="Alpine.js" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">Alpine.js</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Tools & Practices -->
+                                            <div class="space-y-6 group">
+                                                <div class="relative">
+                                                    <h4 class="text-lg font-mono text-rich-black-300 dark:text-mint-green-300 relative z-10">Tools & Practices</h4>
+                                                    <div class="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-8 bg-wine/20 dark:bg-viridian/20 rounded-full transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
+                                                </div>
+                                                <div class="grid grid-cols-2 gap-6">
+                                                    <a href="https://git-scm.com/doc" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">Git</span>
+                                                    </a>
+                                                    <a href="https://docs.github.com/en" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">GitHub</span>
+                                                    </a>
+                                                    <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">MySQL</span>
+                                                    </a>
+                                                    <a href="https://www.sqlite.org/docs.html" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQLite" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">SQLite</span>
+                                                    </a>
+                                                    <a href="https://learning.postman.com/docs/getting-started/introduction/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-rich-black dark:text-mint-green-100 p-3 rounded-lg transition-all duration-300 hover:bg-wine/5 dark:hover:bg-viridian/5 hover:translate-x-1 group/skill">
+                                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" class="w-6 h-6 transition-transform duration-300 group-hover/skill:scale-110">
+                                                        <span class="text-sm font-primary">Postman</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Project Section -->
+                        <section class="relative z-10 overflow-hidden" id="projects">
+                            <!-- Full Width Background -->
+                            <div class="absolute inset-0 w-[100vw] overflow-hidden pointer-events-none">
+                                <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]">
+                                    <div class="absolute inset-0" style="background-image: linear-gradient(90deg, currentColor 1px, transparent 1px), linear-gradient(0deg, currentColor 1px, transparent 1px), linear-gradient(45deg, currentColor 1px, transparent 1px), linear-gradient(-45deg, currentColor 1px, transparent 1px); background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px;"></div>
+                                </div>
+                                <div class="absolute top-1/4 left-10 text-wine/10 dark:text-mint-green-100/10 font-mono text-sm">&lt;code&gt;</div>
+                                <div class="absolute bottom-1/3 right-20 text-mint-green-100/10 dark:text-wine/10 font-mono text-sm">&lt;/div&gt;</div>
+                                <div class="absolute top-2/3 left-1/4 text-wine/10 dark:text-mint-green-100/10 font-mono text-sm">&lt;script&gt;</div>
+                                <div class="absolute top-1/4 right-10 w-32 h-32 border border-wine/10 dark:border-mint-green-100/10 rounded-full animate-spin-slow"></div>
+                                <div class="absolute bottom-1/3 left-20 w-24 h-24 border border-mint-green-100/10 dark:border-wine/10 rounded-full animate-spin-slow-reverse"></div>
+                                <div class="absolute top-1/2 left-0 w-32 h-px bg-gradient-to-r from-transparent via-wine/20 dark:via-mint-green-100/20 to-transparent">
+                                    <div class="absolute -top-1 left-1/2 w-2 h-2 bg-wine/20 dark:bg-mint-green-100/20 rounded-full"></div>
+                                </div>
+                                <div class="absolute top-1/2 right-0 w-32 h-px bg-gradient-to-l from-transparent via-wine/20 dark:via-mint-green-100/20 to-transparent">
+                                    <div class="absolute -top-1 left-1/2 w-2 h-2 bg-wine/20 dark:bg-mint-green-100/20 rounded-full"></div>
+                                </div>
+                                <div class="absolute top-1/3 left-1/4 w-8 h-8 border-2 border-dashed border-wine/10 dark:border-mint-green-100/10 rounded-lg animate-float"></div>
+                                <div class="absolute bottom-1/4 right-1/3 w-6 h-6 border-2 border-dotted border-mint-green-100/10 dark:border-wine/10 rounded-lg animate-float-delayed"></div>
+                            </div>
+
+                            <!-- Content Container -->
+                            <div class="relative py-24">
+                                <div class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto">
+                                    <!-- Section Header -->
+                                    <div class="text-center mb-16 relative">
+                                        <h2 class="text-4xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">
+                                            Featured Projects
+                                            <span class="absolute left-0 -bottom-3 w-16 h-1 bg-wine dark:bg-mint-green-100 rounded transform transition-all duration-300 group-hover:w-24"></span>
+                                        </h2>
+                                        <p class="mt-6 text-lg text-rich-black-300 dark:text-mint-green-300 max-w-2xl mx-auto">
+                                            Explore my latest projects showcasing my skills in web development and design
+                                        </p>
+                                    </div>
+
+                                    <!-- Projects Grid -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12" x-data="{
+                                        projects: [
+                                            {
+                                                id: 1,
+                                                title: 'Dynamic Shop Platform',
+                                                description: 'Built a dynamic shopping cart and checkout system with real-time inventory management. Features include responsive product listings, seamless user interactions without page reloads, and modern UI design.',
+                                                image: 'images/projects/stoa-coffee.png',
+                                                technologies: ['Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Alpine.js', 'HTML/CSS'],
+                                                githubUrl: 'https://github.com/aandrewjuan1/stoa-coffee'
+                                            },
+                                            {
+                                                id: 2,
+                                                title: 'Inventory System with ML',
+                                                description: 'Developed an intelligent inventory tracking system with machine learning capabilities. Features include ML-based demand forecasting, real-time alert dashboards, and Python integration for predictive analytics.',
+                                                image: 'images/projects/sortieasy.png',
+                                                technologies: ['Laravel', 'Livewire', 'Python', 'MySQL', 'Alpine.js', 'HTML/CSS'],
+                                                githubUrl: 'https://github.com/aandrewjuan1/sortieasy'
+                                            },
+                                            {
+                                                id: 3,
+                                                title: 'Media Listing Platform',
+                                                description: 'Created a personal media tracking application for books, anime, and movies. Features include advanced filtering, categorization, status tracking, and a clean, responsive interface.',
+                                                image: 'images/projects/episode.one.png',
+                                                technologies: ['Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Alpine.js', 'HTML/CSS'],
+                                                githubUrl: 'https://github.com/aandrewjuan1/episode.one'
+                                            }
+                                        ]
+                                    }">
+                                        <template x-for="project in projects" :key="project.id">
+                                            <div class="relative group w-full">
+                                                <div class="absolute inset-0 bg-gradient-to-br from-wine/5 to-viridian/5 dark:from-wine/10 dark:to-viridian/10 rounded-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"></div>
+                                                <div class="absolute inset-0 bg-gradient-to-br from-wine/10 to-viridian/10 dark:from-wine/20 dark:to-viridian/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                                <div class="relative p-6 space-y-6 h-full">
+                                                    <div class="relative overflow-hidden rounded-xl group/image aspect-[16/9] w-full">
+                                                        <div class="absolute inset-0 bg-gradient-to-br from-viridian/20 via-transparent to-wine/20 dark:from-wine/20 dark:to-viridian/20 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
+                                                        <img :src="project.image" :alt="project.title" class="w-full h-full object-cover transform transition-all duration-700 group-hover/image:scale-105">
+                                                    </div>
+                                                    <div class="space-y-4 flex-grow">
+                                                        <h3 class="text-xl font-mono text-rich-black dark:text-mint-green-100 relative z-10" x-text="project.title"></h3>
+                                                        <p class="text-rich-black-300 dark:text-mint-green-300" x-text="project.description"></p>
+                                                        <div class="flex flex-wrap gap-2">
+                                                            <template x-for="tech in project.technologies" :key="tech">
+                                                                <span class="px-3 py-1 bg-white/60 dark:bg-rich-black-300/80 backdrop-blur-sm border border-viridian/10 dark:border-viridian/20 text-viridian-600 dark:text-viridian-200 rounded-full text-sm font-mono transition-all duration-300 hover:bg-viridian/5 dark:hover:bg-viridian/10 hover:translate-x-1" x-text="tech"></span>
+                                                            </template>
+                                                        </div>
+                                                        <div class="flex flex-wrap items-center gap-3 mt-4 flex-grow">
+                                                            <a :href="project.githubUrl" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-2.5 bg-wine/20 dark:bg-viridian/20 hover:bg-wine/30 dark:hover:bg-viridian/30 text-wine-900 dark:text-viridian-100 rounded-lg font-mono text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg group min-w-[140px] justify-center">
+                                                                <i class="fab fa-github text-lg"></i>
+                                                                <span>View Code</span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="absolute -top-6 -right-6 w-12 h-12 border-2 border-dashed border-wine/20 dark:border-viridian/20 rounded-full animate-spin-slow"></div>
+                                                    <div class="absolute -bottom-6 -left-6 w-8 h-8 border-2 border-dotted border-viridian/20 dark:border-wine/20 rounded-full animate-spin-slow-reverse"></div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+
+                                    <!-- Learn More Button -->
+                                    <div class="text-center">
+                                        <a href="projects.html" class="inline-flex items-center gap-2 px-8 py-3 bg-wine dark:bg-mint-green text-mint-green-100 dark:text-rich-black rounded-full font-mono font-medium transition-all duration-300 hover:-translate-y-1 hover:bg-wine-700 dark:hover:bg-mint-green-700 hover:shadow-lg group relative overflow-hidden">
+                                            <span class="relative z-10">View All Projects</span>
+                                            <span class="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Contact Section -->
+                        <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden" id="contact">
+                            <div class="relative z-10 w-full max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
+                                <div class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto">
+                                    <!-- Section Header -->
+                                    <div class="text-center mb-16 relative">
+                                        <h2 class="text-4xl font-mono text-rich-black dark:text-mint-green-100 relative inline-block">
+                                            Get in Touch
+                                            <span class="absolute left-0 -bottom-3 w-16 h-1 bg-wine dark:bg-viridian rounded transform transition-all duration-300 group-hover:w-24"></span>
+                                        </h2>
+                                        <p class="mt-6 text-lg text-rich-black-300 dark:text-mint-green-300 max-w-2xl mx-auto">
+                                            Feel free to reach out to me at <a href="mailto:aandrewjuan2@gmail.com" class="text-wine dark:text-viridian hover:underline">aandrewjuan2@gmail.com</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="max-w-2xl mx-auto">
+                                        <!-- Contact Form -->
+                                        <div class="bg-mint-green-100 dark:bg-rich-black-300 p-8 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-[1.02]">
+                                            <form x-data="{ form: { name: '', email: '', message: '' }, isSubmitting: false, async handleSubmit() { this.isSubmitting = true; try { console.log('Form submitted:', this.form); this.form = { name: '', email: '', message: '' }; alert('Message sent successfully!'); } catch (error) { console.error('Error submitting form:', error); alert('Failed to send message. Please try again.'); } finally { this.isSubmitting = false; } } }" @submit.prevent="handleSubmit()" class="space-y-6">
+                                                <div>
+                                                    <label for="name" class="block text-sm font-mono text-rich-black dark:text-mint-green-100">Name</label>
+                                                    <input type="text" id="name" x-model="form.name" class="mt-1 block w-full rounded-lg border-wine/20 dark:border-viridian/20 bg-white dark:bg-rich-black-200 text-rich-black dark:text-mint-green-100 shadow-sm focus:border-wine dark:focus:border-viridian focus:ring-wine/20 dark:focus:ring-viridian/20 transition-colors duration-200" required>
+                                                </div>
+                                                <div>
+                                                    <label for="email" class="block text-sm font-mono text-rich-black dark:text-mint-green-100">Email</label>
+                                                    <input type="email" id="email" x-model="form.email" class="mt-1 block w-full rounded-lg border-wine/20 dark:border-viridian/20 bg-white dark:bg-rich-black-200 text-rich-black dark:text-mint-green-100 shadow-sm focus:border-wine dark:focus:border-viridian focus:ring-wine/20 dark:focus:ring-viridian/20 transition-colors duration-200" required>
+                                                </div>
+                                                <div>
+                                                    <label for="message" class="block text-sm font-mono text-rich-black dark:text-mint-green-100">Message</label>
+                                                    <textarea id="message" x-model="form.message" rows="4" class="mt-1 block w-full rounded-lg border-wine/20 dark:border-viridian/20 bg-white dark:bg-rich-black-200 text-rich-black dark:text-mint-green-100 shadow-sm focus:border-wine dark:focus:border-viridian focus:ring-wine/20 dark:focus:ring-viridian/20 transition-colors duration-200" required></textarea>
+                                                </div>
+                                                <button type="submit" :disabled="isSubmitting" class="w-full px-8 py-3 bg-wine dark:bg-viridian text-mint-green-100 dark:text-rich-black rounded-full font-mono font-medium transition-all duration-300 hover:-translate-y-1 hover:bg-wine-700 dark:hover:bg-viridian-700 hover:shadow-lg group relative overflow-hidden">
+                                                    <span class="relative z-10" x-text="isSubmitting ? 'Sending...' : 'Send Message'"></span>
+                                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <!-- Social Links -->
+                                        <div class="mt-12 text-center">
+                                            <h3 class="text-2xl font-mono text-rich-black dark:text-mint-green-100 mb-6">Connect with Me</h3>
+                                            <div class="flex justify-center gap-6">
+                                                <a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
+                                                    <div class="w-12 h-12 rounded-full bg-wine/10 dark:bg-viridian/10 flex items-center justify-center group-hover:bg-wine/20 dark:group-hover:bg-viridian/20 transition-colors duration-300">
+                                                        <i class="fab fa-github text-xl"></i>
+                                                    </div>
+                                                    <span class="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">GitHub</span>
+                                                </a>
+                                                <a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-rich-black dark:text-mint-green-100 hover:text-wine dark:hover:text-viridian transition-all duration-300">
+                                                    <div class="w-12 h-12 rounded-full bg-wine/10 dark:bg-viridian/10 flex items-center justify-center group-hover:bg-wine/20 dark:group-hover:bg-viridian/20 transition-colors duration-300">
+                                                        <i class="fab fa-linkedin text-xl"></i>
+                                                    </div>
+                                                    <span class="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">LinkedIn</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Footer -->
+            <footer class="w-full bg-mint-green/95 dark:bg-rich-black/95 border-t border-rich-black/10 dark:border-mint-green/10 relative z-10">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rich-black/20 dark:via-mint-green/20 to-transparent"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-bold">Andrew Juan</h3>
+                            <p class="text-sm text-rich-black/70 dark:text-mint-green/70">
+                                A showcase of my work and skills in web development and design.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-bold">Quick Links</h3>
+                            <nav class="flex flex-col space-y-2">
+                                <a href="index.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Home</a>
+                                <a href="about.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">About</a>
+                                <a href="projects.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Projects</a>
+                                <a href="contact.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Contact</a>
+                            </nav>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-bold">Contact Info</h3>
+                            <div class="space-y-2">
+                                <a href="mailto:aandrewjuan2@gmail.com" class="flex items-center space-x-2 text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>aandrewjuan2@gmail.com</span>
+                                </a>
+                                <div class="flex space-x-4 pt-2">
+                                    <a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">
+                                        <i class="fab fa-github text-xl"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">
+                                        <i class="fab fa-linkedin text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-rich-black/10 dark:border-mint-green/10">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                        <div class="flex justify-center">
+                            <p class="text-sm text-rich-black/70 dark:text-mint-green/70">
+                                © <span id="current-year"></span> Andrew Juan. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <style>
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slide-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+        .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
+        .animation-delay-300 { animation-delay: 0.3s; }
+        .animation-delay-400 { animation-delay: 0.4s; }
+        .animation-delay-500 { animation-delay: 0.5s; }
+        .animation-delay-700 { animation-delay: 0.7s; }
+        .typing-cursor { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+        @keyframes float-delayed { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(-5deg); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 8s ease-in-out infinite; }
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin-slow-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-spin-slow-reverse { animation: spin-slow-reverse 25s linear infinite; }
+        .nav-background {
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.03);
+            -webkit-backdrop-filter: blur(16px);
+            -moz-backdrop-filter: blur(16px);
+            -ms-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+        }
+        @supports (-moz-appearance:none) {
+            .nav-background { background: rgba(255, 255, 255, 0.8); }
+        }
+        .dark .nav-background {
+            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.03);
+            -webkit-backdrop-filter: blur(16px);
+            -moz-backdrop-filter: blur(16px);
+            -ms-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+        }
+        @supports (-moz-appearance:none) {
+            .dark .nav-background { background: rgba(0, 0, 0, 0.8); }
+        }
+    </style>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+    <script src="https://unpkg.com/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script>
+        // Verify Alpine.js loaded
+        if (typeof Alpine === 'undefined') {
+            console.error('Alpine.js failed to load - check network connection and CDN availability');
+        } else {
+            console.log('Alpine.js loaded and initialized successfully');
+        }
+    </script>
+</body>
 </html>

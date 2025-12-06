@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Andrew Juan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wine': {
+                            100: '#b98291',
+                            300: '#995266',
+                            DEFAULT: '#6D2E46',
+                            700: '#541d33',
+                            900: '#3b1323'
+                        },
+                        'mint-green': {
+                            100: '#f0f7f5',
+                            300: '#dcebe6',
+                            DEFAULT: '#D1E3DD',
+                            700: '#a5b8b3',
+                            900: '#7f918d'
+                        },
+                        'rich-black': {
+                            100: '#3e4a51',
+                            300: '#233239',
+                            DEFAULT: '#011C27',
+                            700: '#000d12',
+                            900: '#000406'
+                        },
+                        'viridian': {
+                            100: '#b3ccc5',
+                            300: '#7ca89c',
+                            DEFAULT: '#4C8577',
+                            700: '#326157',
+                            900: '#1d3e37'
+                        }
+                    },
+                    fontFamily: {
+                        'primary': ['Cousine', 'sans-serif'],
+                        'mono': ['Syne Mono', 'monospace']
+                    }
+                }
+            },
+            darkMode: 'class'
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="js/theme.js"></script>
+    <script src="js/scroll-progress.js"></script>
+</head>
+<body>
+    <div class="relative min-h-screen font-primary bg-mint-green/95 dark:bg-rich-black/95 text-rich-black dark:text-mint-green transition-colors duration-200">
+        <div id="scroll-progress" class="fixed top-0 left-0 h-1 z-50 transition-all duration-300" aria-hidden="true">
+            <div class="h-full w-full bg-gradient-to-r from-wine via-viridian to-mint-green dark:from-mint-green dark:via-viridian dark:to-wine opacity-95"></div>
+        </div>
+        <div class="fixed inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -inset-[10px] opacity-20">
+                <div class="absolute top-0 -left-4 w-72 h-72 bg-[var(--color-wine)] rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+                <div class="absolute top-0 -right-4 w-72 h-72 bg-[var(--color-viridian)] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+                <div class="absolute -bottom-8 left-20 w-72 h-72 bg-[var(--color-mint-green)] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+            </div>
+        </div>
+        <div class="relative min-h-screen flex flex-col">
+            <!-- Navbar (same structure as index.html) -->
+            <nav x-data='{ isMobileMenuOpen: false, isScrolled: false, currentPath: window.location.pathname, navItems: [{ name: "Home", path: "index.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z\" /></svg>" }, { name: "About", path: "about.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z\" clip-rule=\"evenodd\" /></svg>" }, { name: "Projects", path: "projects.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z\" /></svg>" }, { name: "Contact", path: "contact.html", icon: "<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path d=\"M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z\" /><path d=\"M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z\" /></svg>" }], toggleMobileMenu() { this.isMobileMenuOpen = !this.isMobileMenuOpen; document.body.style.overflow = this.isMobileMenuOpen ? "hidden" : ""; }, closeMobileMenu() { this.isMobileMenuOpen = false; document.body.style.overflow = ""; }, isActive(path) { const current = window.location.pathname.split("/").pop() || "index.html"; return current === path || (current === "" && path === "index.html"); } }' @scroll.window="isScrolled = window.scrollY > 20" @keydown.escape.window="if (isMobileMenuOpen) closeMobileMenu()" class="w-[90%] md:w-[80%] lg:w-[70%] mx-auto fixed left-1/2 -translate-x-1/2 top-2 z-40 transition-all duration-300 rounded-lg focus-visible:outline-none" :class="{ 'nav-background shadow-lg': isScrolled }" role="navigation" aria-label="Main navigation">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-16">
+                        <div class="hidden md:flex items-center space-x-8">
+                            <template x-for="item in navItems" :key="item.path">
+                                <a :href="item.path" class="group relative px-3 py-2 transition-all duration-200 focus:outline-none font-mono" :class="isActive(item.path) ? 'font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]' : 'text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-b-2 hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'" :aria-current="isActive(item.path) ? 'page' : undefined">
+                                    <div class="flex items-center space-x-2">
+                                        <span x-html="item.icon" class="transition-transform group-hover:scale-110" aria-hidden="true"></span>
+                                        <span x-text="item.name"></span>
+                                    </div>
+                                </a>
+                            </template>
+                        </div>
+                        <div class="md:hidden">
+                            <button @click="toggleMobileMenu()" class="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300 focus:outline-none focus:ring-2 focus:ring-wine dark:focus:ring-mint-green" :aria-expanded="isMobileMenuOpen" aria-controls="mobile-menu" aria-label="Toggle mobile menu">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <template x-if="!isMobileMenuOpen"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></template>
+                                    <template x-if="isMobileMenuOpen"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></template>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex items-center" x-data="{ showDropdown: false, theme: window.themeManager?.getStoredTheme() || 'system', isDark: document.documentElement.classList.contains('dark'), toggleDropdown() { this.showDropdown = !this.showDropdown; }, updateTheme(newTheme) { if (window.themeManager) { const result = window.themeManager.updateTheme(newTheme); this.theme = result.theme; this.isDark = result.isDark; } this.showDropdown = false; } }" @click.away="showDropdown = false">
+                            <div class="relative inline-block theme-toggle">
+                                <button @click="toggleDropdown()" class="p-2 rounded-lg hover:bg-mint-green-300 dark:hover:bg-rich-black-300 transition-colors" :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+                                    <svg x-show="isDark" class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                    <svg x-show="!isDark" class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                                </button>
+                                <div x-show="showDropdown" x-transition class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-mint-green dark:bg-rich-black z-50">
+                                    <div class="py-1" role="menu">
+                                        <button @click="updateTheme('light')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'light' }" role="menuitem">Light</button>
+                                        <button @click="updateTheme('dark')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'dark' }" role="menuitem">Dark</button>
+                                        <button @click="updateTheme('system')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-mint-green-300 dark:hover:bg-rich-black-300" :class="{ 'bg-mint-green-300 dark:bg-rich-black-300': theme === 'system' }" role="menuitem">System</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-show="isMobileMenuOpen" x-transition id="mobile-menu" class="md:hidden py-4" role="menu" aria-orientation="vertical">
+                        <template x-for="item in navItems" :key="item.path">
+                            <a :href="item.path" @click="closeMobileMenu()" class="group flex items-center space-x-2 px-4 py-2 transition-all duration-200 focus:outline-none font-mono" :class="isActive(item.path) ? 'font-semibold text-wine dark:text-mint-green border-b-2 border-[var(--color-wine)] dark:border-[var(--color-mint-green)]' : 'text-gray-700 dark:text-mint-green border-b-2 border-transparent hover:text-wine dark:hover:text-mint-green hover:border-[var(--color-wine)] dark:hover:border-[var(--color-mint-green)]'" role="menuitem" :aria-current="isActive(item.path) ? 'page' : undefined">
+                                <span x-html="item.icon" class="transition-transform group-hover:scale-110" aria-hidden="true"></span>
+                                <span x-text="item.name"></span>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </nav>
+            <div class="flex-1 flex flex-col">
+                <main class="flex-1">
+                    <div class="min-h-screen flex flex-col">
+                        <div class="absolute inset-0 w-[100vw] overflow-hidden pointer-events-none">
+                            <div class="absolute inset-0 bg-gradient-to-br from-wine/5 via-transparent to-viridian/5 dark:from-wine/10 dark:via-transparent dark:to-viridian/10"></div>
+                            <div class="absolute top-1/4 left-10 w-1.5 h-1.5 bg-wine/10 dark:bg-viridian/10 rounded-full animate-float"></div>
+                            <div class="absolute bottom-1/3 right-20 w-1 h-1 bg-viridian/10 dark:bg-wine/10 rounded-full animate-float-delayed"></div>
+                        </div>
+                        <div class="relative w-[90%] md:w-[80%] lg:w-[70%] mx-auto py-36 flex-1">
+                            <div class="text-center space-y-4 mb-16">
+                                <h1 class="text-5xl font-mono text-rich-black dark:text-mint-green-100">Projects</h1>
+                                <p class="text-lg text-rich-black-300 dark:text-mint-green-300 max-w-3xl mx-auto">A collection of my work, showcasing both frontend and full-stack projects.</p>
+                            </div>
+                            <div x-data="{ activeCategory: 'all', categories: [{ id: 'all', label: 'All Projects' }, { id: 'frontend', label: 'Frontend Projects' }, { id: 'fullstack', label: 'Full Stack Projects' }], projects: [{ id: 1, title: 'Beauty of Kazakhstan: Cultural Landing Page', description: 'An immersive landing page showcasing Kazakhstan\'s rich culture, cuisine, attractions, and activities. Features include interactive sections for traditional dishes, popular tourist destinations, leisure activities, and cultural insights. Built with a focus on visual storytelling and user engagement.', category: 'frontend', technologies: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'], image: 'images/projects/beauty-of-kazakhstan.png', liveUrl: 'https://aandrewjuan1.github.io/beauty_of_kazakhstan/', githubUrl: 'https://github.com/aandrewjuan1/beauty_of_kazakhstan' }, { id: 2, title: 'Plato Spot: Filipino Restaurant Website', description: 'A modern restaurant website featuring a menu section and simple POS system for a Filipino restaurant. Includes responsive design, menu filtering, cart functionality, and an about section showcasing the restaurant\'s story and best-selling dishes.', category: 'frontend', technologies: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'], image: 'images/projects/plato-spot.png', liveUrl: 'https://aandrewjuan1.github.io/plato.spot/', githubUrl: 'https://github.com/aandrewjuan1/plato.spot' }, { id: 3, title: 'ACMASTERS Landing Page', description: 'A modern, responsive landing page for an air conditioning business. Features include service showcases, customer testimonials, FAQ section, and a contact form. Built with a focus on user experience and conversion optimization.', category: 'frontend', technologies: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'], image: 'images/projects/acmasters.png', liveUrl: 'https://aandrewjuan1.github.io/acmasters/', githubUrl: 'https://github.com/aandrewjuan1/acmasters' }, { id: 4, title: 'Dynamic Shop Platform', description: 'Built a dynamic shopping cart and checkout system with real-time inventory management. Features include responsive product listings, seamless user interactions without page reloads, and modern UI design.', category: 'fullstack', technologies: ['Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Alpine.js', 'HTML', 'CSS'], image: 'images/projects/stoa-coffee.png', githubUrl: 'https://github.com/aandrewjuan1/stoa-coffee' }, { id: 5, title: 'sortieasy: Inventory System with ML', description: 'Developed an intelligent inventory tracking system with machine learning capabilities. Features include ML-based demand forecasting, real-time alert dashboards, and Python integration for predictive analytics.', category: 'fullstack', technologies: ['Laravel', 'Livewire', 'Python', 'MySQL', 'Alpine.js', 'HTML', 'CSS'], image: 'images/projects/sortieasy.png', githubUrl: 'https://github.com/aandrewjuan1/sortieasy' }, { id: 6, title: 'episode.one: Media Listing Platform', description: 'Created a personal media tracking application for books, anime, and movies. Features include advanced filtering, categorization, status tracking, and a clean, responsive interface.', category: 'fullstack', technologies: ['Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Alpine.js', 'HTML', 'CSS'], image: 'images/projects/episode.one.png', githubUrl: 'https://github.com/aandrewjuan1/episode.one' }, { id: 7, title: 'Portfolio Website', description: 'A modern, responsive portfolio website built with Vue 3, TypeScript, and Tailwind CSS. Features dark mode, smooth animations, and a clean design.', category: 'frontend', technologies: ['Vue 3', 'TypeScript', 'Tailwind CSS', 'Vite'], image: 'images/projects/portfolioImage.png', liveUrl: 'https://aandrewjuan1.github.io/portfolio/', githubUrl: 'https://github.com/aandrewjuan1/portfolio' }], get filteredProjects() { if (this.activeCategory === 'all') return this.projects; return this.projects.filter(p => p.category === this.activeCategory); } }">
+                                <div class="flex flex-wrap justify-center gap-4 mb-16">
+                                    <template x-for="category in categories" :key="category.id">
+                                        <button @click="activeCategory = category.id" class="px-6 py-2 rounded-full font-mono text-sm transition-all duration-200" :class="activeCategory === category.id ? 'bg-wine text-mint-green-100' : 'bg-white/50 dark:bg-rich-black-300 backdrop-blur-sm border border-wine/10 dark:border-viridian/10 text-wine dark:text-viridian hover:bg-wine/5 dark:hover:bg-viridian/5'">
+                                            <span x-text="category.label"></span>
+                                        </button>
+                                    </template>
+                                </div>
+                                <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 [&>*]:break-inside-avoid">
+                                    <template x-for="project in filteredProjects" :key="project.id">
+                                        <div class="relative group w-full mb-8">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-wine/5 to-viridian/5 dark:from-wine/10 dark:to-viridian/10 rounded-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"></div>
+                                            <div class="absolute inset-0 bg-gradient-to-br from-wine/10 to-viridian/10 dark:from-wine/20 dark:to-viridian/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                            <div class="relative p-6 space-y-6 h-full">
+                                                <div class="relative overflow-hidden rounded-xl group/image aspect-[16/9] w-full">
+                                                    <div class="absolute inset-0 bg-gradient-to-br from-viridian/20 via-transparent to-wine/20 dark:from-wine/20 dark:to-viridian/20 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
+                                                    <img :src="project.image" :alt="project.title" class="w-full h-full object-cover transform transition-all duration-700 group-hover/image:scale-105">
+                                                </div>
+                                                <div class="space-y-4 flex-grow">
+                                                    <div class="flex items-center justify-between">
+                                                        <h3 class="text-xl font-mono text-rich-black dark:text-mint-green-100 relative z-10" x-text="project.title"></h3>
+                                                        <span class="px-3 py-1 text-xs font-mono rounded-full" :class="project.category === 'frontend' ? 'bg-viridian/20 text-viridian-900 dark:text-viridian' : 'bg-wine/20 text-wine-900 dark:text-wine'" x-text="project.category"></span>
+                                                    </div>
+                                                    <p class="text-rich-black-300 dark:text-mint-green-300" x-text="project.description"></p>
+                                                    <div class="flex flex-wrap gap-2">
+                                                        <template x-for="tech in project.technologies" :key="tech">
+                                                            <span class="px-3 py-1 bg-white/60 dark:bg-rich-black-300/80 backdrop-blur-sm border border-viridian/10 dark:border-viridian/20 text-viridian-600 dark:text-viridian-200 rounded-full text-sm font-mono transition-all duration-300 hover:bg-viridian/5 dark:hover:bg-viridian/10 hover:translate-x-1" x-text="tech"></span>
+                                                        </template>
+                                                    </div>
+                                                    <div class="flex flex-wrap items-center gap-3 mt-4 flex-grow">
+                                                        <a x-show="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-2.5 bg-viridian/20 dark:bg-wine/20 hover:bg-viridian/30 dark:hover:bg-wine/30 text-viridian-900 dark:text-wine-100 rounded-lg font-mono text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg group min-w-[140px] justify-center">
+                                                            <span>Live Demo</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" /><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" /></svg>
+                                                        </a>
+                                                        <a :href="project.githubUrl" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-2.5 bg-wine/20 dark:bg-viridian/20 hover:bg-wine/30 dark:hover:bg-viridian/30 text-wine-900 dark:text-viridian-100 rounded-lg font-mono text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg group min-w-[140px] justify-center">
+                                                            <i class="fab fa-github text-lg"></i>
+                                                            <span>View Code</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="absolute -top-6 -right-6 w-12 h-12 border-2 border-dashed border-wine/20 dark:border-viridian/20 rounded-full animate-spin-slow"></div>
+                                                <div class="absolute -bottom-6 -left-6 w-8 h-8 border-2 border-dotted border-viridian/20 dark:border-wine/20 rounded-full animate-spin-slow-reverse"></div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <!-- Footer (same as index.html) -->
+            <footer class="w-full bg-mint-green/95 dark:bg-rich-black/95 border-t border-rich-black/10 dark:border-mint-green/10 relative z-10">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rich-black/20 dark:via-mint-green/20 to-transparent"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="space-y-4"><h3 class="text-xl font-bold">Andrew Juan</h3><p class="text-sm text-rich-black/70 dark:text-mint-green/70">A showcase of my work and skills in web development and design.</p></div>
+                        <div class="space-y-4"><h3 class="text-xl font-bold">Quick Links</h3><nav class="flex flex-col space-y-2"><a href="index.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Home</a><a href="about.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">About</a><a href="projects.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Projects</a><a href="contact.html" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors">Contact</a></nav></div>
+                        <div class="space-y-4"><h3 class="text-xl font-bold">Contact Info</h3><div class="space-y-2"><a href="mailto:aandrewjuan2@gmail.com" class="flex items-center space-x-2 text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors"><i class="fas fa-envelope"></i><span>aandrewjuan2@gmail.com</span></a><div class="flex space-x-4 pt-2"><a href="https://github.com/aandrewjuan1" target="_blank" rel="noopener noreferrer" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors"><i class="fab fa-github text-xl"></i></a><a href="https://www.linkedin.com/in/andrew-juan-0b8757362/" target="_blank" rel="noopener noreferrer" class="text-rich-black/70 dark:text-mint-green/70 hover:text-rich-black dark:hover:text-mint-green transition-colors"><i class="fab fa-linkedin text-xl"></i></a></div></div></div>
+                    </div>
+                </div>
+                <div class="border-t border-rich-black/10 dark:border-mint-green/10">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                        <div class="flex justify-center"><p class="text-sm text-rich-black/70 dark:text-mint-green/70">© <span id="current-year-projects"></span> Andrew Juan. All rights reserved.</p></div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <style>
+        @keyframes blob { 0% { transform: translate(0px, 0px) scale(1); } 33% { transform: translate(30px, -50px) scale(1.1); } 66% { transform: translate(-20px, 20px) scale(0.9); } 100% { transform: translate(0px, 0px) scale(1); } }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+        @keyframes float-delayed { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(-5deg); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 8s ease-in-out infinite; }
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin-slow-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-spin-slow-reverse { animation: spin-slow-reverse 25s linear infinite; }
+        .nav-background { transition: all 0.3s; background: rgba(255, 255, 255, 0.8); background: rgba(255, 255, 255, 0.03); -webkit-backdrop-filter: blur(16px); -moz-backdrop-filter: blur(16px); -ms-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+        @supports (-moz-appearance:none) { .nav-background { background: rgba(255, 255, 255, 0.8); } }
+        .dark .nav-background { background: rgba(0, 0, 0, 0.8); background: rgba(0, 0, 0, 0.03); -webkit-backdrop-filter: blur(16px); -moz-backdrop-filter: blur(16px); -ms-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+        @supports (-moz-appearance:none) { .dark .nav-background { background: rgba(0, 0, 0, 0.8); } }
+    </style>
+    <script>document.getElementById('current-year-projects').textContent = new Date().getFullYear();</script>
+    <script src="https://unpkg.com/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script>
+        if (typeof Alpine === 'undefined') {
+            console.error('Alpine.js failed to load');
+        }
+    </script>
+</body>
+</html>
