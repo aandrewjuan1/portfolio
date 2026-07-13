@@ -510,26 +510,26 @@
                                         projects: [
                                             {
                                                 id: 1,
-                                                title: 'Dynamic Shop Platform',
-                                                description: 'Built a dynamic shopping cart and checkout system with real-time inventory management. Features include responsive product listings, seamless user interactions without page reloads, and modern UI design.',
-                                                image: './images/projects/stoa-coffee.png',
-                                                technologies: ['Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Alpine.js', 'HTML/CSS'],
-                                                githubUrl: 'https://github.com/aandrewjuan1/stoa-coffee'
+                                                title: 'taskLyst: AI Student Task Manager',
+                                                highlights: ['Built thesis-grade student task manager with AI prioritization and predictive scheduling for academic workloads', 'Integrated local Hermes 3 (3B) via Ollama for conversational assistance, intent routing, and smart recommendations', 'Built dashboard, workspace, calendar, notifications, and analytics with Brightspace sync and Pomodoro sessions', 'Implemented privacy-first design with minimal context inference, validation workflows, and access controls'],
+                                                image: './images/projects/tasklyst.png',
+                                                technologies: ['Laravel', 'Livewire', 'Ollama', 'Hermes 3', 'MySQL', 'Tailwind CSS', 'Alpine.js'],
+                                                githubUrl: 'https://github.com/aandrewjuan1/tasklyst'
                                             },
                                             {
                                                 id: 2,
-                                                title: 'Inventory System with ML',
-                                                description: 'Developed an intelligent inventory tracking system with machine learning capabilities. Features include ML-based demand forecasting, real-time alert dashboards, and Python integration for predictive analytics.',
+                                                title: 'sortieasy: Inventory System with ML',
+                                                highlights: ['Developed intelligent inventory system with ML-based demand forecasting', 'Integrated Python predictive analytics with Laravel/Livewire admin dashboard', 'Built real-time alert dashboards for low-stock and reorder notifications', 'Designed full-stack solution with MySQL for reliable inventory data management'],
                                                 image: './images/projects/sortieasy.png',
-                                                technologies: ['Laravel', 'Livewire', 'Python', 'MySQL', 'Alpine.js', 'HTML/CSS'],
+                                                technologies: ['Laravel', 'Livewire', 'Python', 'MySQL', 'Alpine.js', 'HTML', 'CSS'],
                                                 githubUrl: 'https://github.com/aandrewjuan1/sortieasy'
                                             },
                                             {
                                                 id: 3,
-                                                title: 'Media Listing Platform',
-                                                description: 'Created a personal media tracking application for books, anime, and movies. Features include advanced filtering, categorization, status tracking, and a clean, responsive interface.',
+                                                title: 'episode.one: Media Listing Platform',
+                                                highlights: ['Created personal media tracker for books, anime, and movies with watch/read status tracking', 'Implemented advanced filtering and categorization across multiple media types', 'Built clean, responsive interface using Laravel, Livewire, and Alpine.js', 'Designed relational MySQL schema for efficient media cataloging and queries'],
                                                 image: './images/projects/episode.one.png',
-                                                technologies: ['Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Alpine.js', 'HTML/CSS'],
+                                                technologies: ['Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Alpine.js', 'HTML', 'CSS'],
                                                 githubUrl: 'https://github.com/aandrewjuan1/episode.one'
                                             }
                                         ]
@@ -545,7 +545,11 @@
                                                     </div>
                                                     <div class="space-y-4 flex-grow">
                                                         <h3 class="text-xl font-mono text-rich-black dark:text-mint-green-100 relative z-10" x-text="project.title"></h3>
-                                                        <p class="text-rich-black-300 dark:text-mint-green-300" x-text="project.description"></p>
+                                                        <ul class="list-disc list-outside pl-5 space-y-1.5 text-sm text-rich-black-300 dark:text-mint-green-300">
+                                                            <template x-for="highlight in project.highlights" :key="highlight">
+                                                                <li x-text="highlight"></li>
+                                                            </template>
+                                                        </ul>
                                                         <div class="flex flex-wrap gap-2">
                                                             <template x-for="tech in project.technologies" :key="tech">
                                                                 <span class="px-3 py-1 bg-white/60 dark:bg-rich-black-300/80 backdrop-blur-sm border border-viridian/10 dark:border-viridian/20 text-viridian-600 dark:text-viridian-200 rounded-full text-sm font-mono transition-all duration-300 hover:bg-viridian/5 dark:hover:bg-viridian/10 hover:translate-x-1" x-text="tech"></span>
